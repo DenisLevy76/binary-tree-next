@@ -1,8 +1,4 @@
-.canvasContainer{
-
-}
-
-.canvas{
-  border: 1px solid black;
-
+.container{
+  width: 500;
+  height: 500;
 }
