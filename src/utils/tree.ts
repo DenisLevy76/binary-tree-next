@@ -104,8 +104,3 @@ function isBalanced(root : NodeTree) {
   }
 }
 
-let arvore = new NodeTree(50)
-arvore.insert(25)
-arvore.insert(10)
-
-
