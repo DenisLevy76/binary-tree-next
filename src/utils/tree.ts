@@ -1,3 +1,9 @@
+interface RawNodeDatum {
+  name: number;
+  attributes?: Record<string, string>;
+  children?: RawNodeDatum[];
+}
+
 export class NodeTree{
   constructor(value: number){
     this.value = value;
@@ -32,9 +38,30 @@ export class NodeTree{
     this.right?.posOrder();
     console.log(this.value);
   }
+
+  convertToRawNodeDatum(){
+    const RawNodeDatumLeft: RawNodeDatum = this.left?.convertToRawNodeDatum();
+    const RawNodeDatumRight: RawNodeDatum = this.right?.convertToRawNodeDatum();
+    const children = [];
+
+    RawNodeDatumLeft && children.push(RawNodeDatumLeft);
+    RawNodeDatumRight && children.push(RawNodeDatumRight);
+
+    if (children.length > 0){
+      return {
+        name: this.value,
+        children
+      } as RawNodeDatum;
+    }
+    else{
+      return {
+        name: this.value,
+      } as RawNodeDatum;
+    }
+  }
 }
 
-function BFS(root: NodeTree){
+export function BFS(root: NodeTree){
   const visited = [root];
   let i = 0;
   while(i < visited.length){
@@ -43,5 +70,5 @@ function BFS(root: NodeTree){
     i++;
   }
 
-  return visited
+  return visited;
 }
