@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 const Tree = dynamic(() => import('react-d3-tree'))
 
 interface RawNodeDatum {
-  name: number;
+  name: string;
   attributes?: Record<string, string>;
   children?: RawNodeDatum[];
 }
@@ -37,7 +37,7 @@ export const TreeGraph: React.FC = () => {
       <div
         id="treeWrapper"
         className={styles.treeContainer}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '500px' }}
       >
         {
           tree && (<Tree
