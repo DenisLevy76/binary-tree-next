@@ -32,12 +32,9 @@ export const TreeGraph: React.FC = () => {
 
   return (
     <div>
-      <input type="number" placeholder="Número de nós" onChange={(e) => setNumberOfNodes(Number(e.target.value))}/>
-      <button type="button" onClick={() => createNewTree(numberOfNodes)}>Criar arvore</button>
       <div
         id="treeWrapper"
         className={styles.treeContainer}
-        style={{ width: '100%', height: '500px' }}
       >
         {
           tree && (<Tree
