@@ -1,10 +1,13 @@
 import React from 'react'
+import { ContextTreeProvider } from '../contexts/ContextTree';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
     <div>
-      <Component {...pageProps} />
+      <ContextTreeProvider>
+        <Component {...pageProps} />
+      </ContextTreeProvider>
     </div>
   );
 }

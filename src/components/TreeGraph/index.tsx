@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import dynamic from 'next/dynamic'
-import { randomTree } from '../../utils/randomTree';
-import { NodeTree } from '../../utils/tree';
+// import { randomTree } from '../../utils/randomTree';
+// import { NodeTree } from '../../utils/tree';
 
 import styles from './styles.module.css'
+import { ContextTree } from '../../contexts/ContextTree';
 
 const Tree = dynamic(() => import('react-d3-tree'))
 
@@ -14,21 +15,7 @@ interface RawNodeDatum {
 }
 
 export const TreeGraph: React.FC = () => {
-  const [numberOfNodes, setNumberOfNodes] = useState(0);
-  const [tree, setTree] = useState(null as RawNodeDatum)
-
-  function createNewTree(number: number){
-    const randomNumbers: number[] = randomTree(number);
-    const newTree: NodeTree = new NodeTree(randomNumbers[0]);
-
-    randomNumbers.map((number, index) => {
-      if (index > 0) newTree.insert(number);
-    })
-
-    const treeRawNodeDatum: RawNodeDatum = newTree.convertToRawNodeDatum()
-
-    setTree(treeRawNodeDatum);
-  }
+  const {tree, createNewTree} = useContext(ContextTree)
 
   return (
     <div>
