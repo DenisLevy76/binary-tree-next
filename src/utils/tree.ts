@@ -1,5 +1,5 @@
 interface RawNodeDatum {
-  name: number;
+  name: string;
   attributes?: Record<string, string>;
   children?: RawNodeDatum[];
 }
@@ -49,13 +49,13 @@ export class NodeTree{
 
     if (children.length > 0){
       return {
-        name: this.value,
+        name: String(this.value),
         children
       } as RawNodeDatum;
     }
     else{
       return {
-        name: this.value,
+        name: String(this.value),
       } as RawNodeDatum;
     }
   }
@@ -102,7 +102,7 @@ function isBalanced(root : NodeTree) {
       if (visited[i].right.right === null && visited[i].right.left === null) {
         i = visited.length;
         break;
-        
+
       }
       else {
         console.log("Não esta Balanceada!");
