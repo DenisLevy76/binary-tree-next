@@ -1,4 +1,8 @@
-import { randomTree } from "./randomTree";
+interface RawNodeDatum {
+  name: number;
+  attributes?: Record<string, string>;
+  children?: RawNodeDatum[];
+}
 
 export class NodeTree{
   constructor(value: number){
@@ -34,7 +38,29 @@ export class NodeTree{
     this.right?.posOrder();
     console.log(this.value);
   }
+
+  convertToRawNodeDatum(){
+    const RawNodeDatumLeft: RawNodeDatum = this.left?.convertToRawNodeDatum();
+    const RawNodeDatumRight: RawNodeDatum = this.right?.convertToRawNodeDatum();
+    const children = [];
+
+    RawNodeDatumLeft && children.push(RawNodeDatumLeft);
+    RawNodeDatumRight && children.push(RawNodeDatumRight);
+
+    if (children.length > 0){
+      return {
+        name: this.value,
+        children
+      } as RawNodeDatum;
+    }
+    else{
+      return {
+        name: this.value,
+      } as RawNodeDatum;
+    }
+  }
 }
+
 
 function BFS(root: NodeTree){
   const visited : NodeTree[] = [root];
@@ -45,7 +71,7 @@ function BFS(root: NodeTree){
     i++;
   }
 
-  return visited
+  return visited;
 }
 
 function isBalanced(root : NodeTree) {
