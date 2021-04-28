@@ -8,8 +8,8 @@ export class NodeTree{
   constructor(value: number){
     this.value = value;
   }
-  value: number;
 
+  value: number;
   left: NodeTree = null;
   right: NodeTree = null;
 
@@ -33,9 +33,9 @@ export class NodeTree{
     console.log(this.value);
     this.right?.inOrder();
   }
-  posOrder(){
-    this.left?.posOrder();
-    this.right?.posOrder();
+  postOrder(){
+    this.left?.postOrder();
+    this.right?.postOrder();
     console.log(this.value);
   }
 
@@ -62,7 +62,7 @@ export class NodeTree{
 }
 
 
-function BFS(root: NodeTree){
+export function BFS(root: NodeTree){ //breadth-first search
   const visited : NodeTree[] = [root];
   let i = 0;
   while(i < visited.length){

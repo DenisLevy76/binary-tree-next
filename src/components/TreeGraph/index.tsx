@@ -15,7 +15,7 @@ interface RawNodeDatum {
 }
 
 export const TreeGraph: React.FC = () => {
-  const {tree, createNewTree} = useContext(ContextTree)
+  const {treeRawNodeDatum, createNewTree} = useContext(ContextTree)
 
   return (
     <div>
@@ -24,8 +24,8 @@ export const TreeGraph: React.FC = () => {
         className={styles.treeContainer}
       >
         {
-          tree && (<Tree
-            data={tree}
+          treeRawNodeDatum && (<Tree
+            data={treeRawNodeDatum}
             orientation="vertical"
             translate={{
               x: 240,
