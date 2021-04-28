@@ -18,3 +18,13 @@ a {
   padding: 0;
 
 }
+
+button:hover{
+  cursor: pointer;
+}
+
+button:active{
+  transform: scale(0.9);
+}
+
+

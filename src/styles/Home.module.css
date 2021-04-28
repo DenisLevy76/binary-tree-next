@@ -1,6 +1,20 @@
-.container {
-  height: 100vh;
-  width: 100vw;
+.containerIndex {
+  height: 100%;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+
+  padding: 2rem 6rem;
+
+  gap: 2rem;
+}
+
+@media (max-width: 1080px){
+  .containerIndex{
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .main {
