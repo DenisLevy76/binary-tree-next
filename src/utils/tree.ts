@@ -76,30 +76,28 @@ function BFS(root: NodeTree){
 
 function isBalanced(root : NodeTree) {
   const visited : NodeTree[] = [root];
+  const visitedleft : NodeTree[] = [root];
+  const visitedright : NodeTree[] = [root];
   let i = 0;
   while(i < visited.length){
     visited[i].left && visited.push(visited[i].left);
-    visited[i].right && visited.push(visited[i].right);
+    visited[i].right && visited.push(visited[i].right); // poe todos os elementos em uma lista
     i++;
   }
   i = 0;
+  while(i < visitedleft.length && visitedright.length > i){
+      visitedleft[i].left && visitedleft.push(visitedleft[i].left);
+      visitedright[i].right && visitedright.push(visitedright[i].right); // poe o nó raiz e todas as extremidas em uma lista
+      i++;
+    }
+  i = 0;
+  let dir = visitedright.length-1;
+  let esq = visitedleft.length-1;
+  if ((esq - dir) > 1 || (esq - dir) < -1) {
+      console.log("Não está balanceada");
+      i = 10;
+    }
   while (i < visited.length) {
-    if (visited[i].left !== null && visited[i].right !== null) {
-      if(visited[i+2].left !== null && visited[i+2].right !== null) {
-        if(visited[i+4].right !== null || visited[i+4].left !== null) {
-          console.log("Não esta Balanceada!");
-          break;
-        }
-      }
-    }
-    if (visited[i].left !== null && visited[i].right !== null) {
-      if(visited[i+1].left !== null && visited[i+1].right !== null) {
-        if(visited[i+3].right !== null || visited[i+3].left !== null) {
-          console.log("Não esta Balanceada!");
-          break;
-        }
-      }
-    }
     if (visited[i].left === null && visited[i].right !== null) {
       if (visited[i].right.right === null && visited[i].right.left === null) {
         i = visited.length;
