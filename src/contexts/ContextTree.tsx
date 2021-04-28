@@ -113,7 +113,7 @@ export const ContextTreeProvider: React.FC = ({children}) => {
     const BFSlist = BFS(tree)
     const stringfy  = BFSlist.map(node => node.value).join(', ')
 
-    const msg: msgData = {title: "Pós-ordem:", body: stringfy}
+    const msg: msgData = {title: "Em largura:", body: stringfy}
 
     setHistory((history) => [...history, msg])
   }
