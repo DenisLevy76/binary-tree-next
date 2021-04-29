@@ -1,6 +1,6 @@
 .container{
   width: 100%;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 170px);
 
   background-color: white;
   text-align: center;
@@ -23,6 +23,10 @@
   height: 87%;
 
   overflow-y: scroll;
+
+  padding: 1rem;
+
+  list-style: none;
 }
 
 .ul::-webkit-scrollbar-track {
@@ -39,5 +43,21 @@
 .ul::-webkit-scrollbar-thumb {
   background: #dad7d7;
   border-radius: 5px;
+}
 
+.li{
+  text-align: left;
+  font-family: Zen Dots;
+  border-top: 1px solid #e1e1e1;
+  padding: 0.5rem 0;
+}
+
+.h3{
+  font-size: 1rem;
+}
+
+.p{
+  font-size: 0.8rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
