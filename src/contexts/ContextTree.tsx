@@ -14,7 +14,6 @@ interface msgData{
 }
 
 interface createContextData{
-  numberOfNodes: number;
   treeRawNodeDatum: RawNodeDatum;
   tree: NodeTree;
   history: msgData[];
@@ -30,7 +29,6 @@ interface createContextData{
 export const ContextTree = createContext({} as createContextData)
 
 export const ContextTreeProvider: React.FC = ({children}) => {
-  const [numberOfNodes, setNumberOfNodes] = useState(0);
   const [treeRawNodeDatum, setTreeRawNodeDatum] = useState(null as RawNodeDatum)
   const [tree, setTree] = useState(null as NodeTree)
   const [history, setHistory] = useState([])
@@ -115,7 +113,6 @@ export const ContextTreeProvider: React.FC = ({children}) => {
 
   return (
     <ContextTree.Provider value={{
-      numberOfNodes,
       treeRawNodeDatum,
       tree,
       history,
