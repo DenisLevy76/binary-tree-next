@@ -1,0 +1,36 @@
+.staffContent {
+  display: flex;
+  padding: 0.8rem;
+  background-color: white;
+  border-radius: 1.5rem;
+  align-items: center;
+  width: 80%;
+}
+
+.imgStaff {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 100%;
+}
+
+.divContent {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem;
+}
+
+.ulContent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.a {
+  color: #9F75FF;
+  margin-top: 0.8rem;
+}
+
+.a:hover{
+  text-decoration: underline;
+}

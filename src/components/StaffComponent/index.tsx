@@ -1,9 +1,34 @@
-import React from 'react'
+import React from "react"
+import styles from "./styles.module.css"
 
-export default function StaffComponent(props) {
+interface People{
+  name : string;
+  image : string;
+  role : string;
+  socialMedia : string;
+}
+
+interface StaffComponentProps{
+  peoples: People[]
+}
+
+export default function StaffComponent({ peoples }: StaffComponentProps) {
   return (
-    <div>
-      <h1>{props.name}</h1>
-    </div>
+    <ul className={styles.ulContent}>
+      {peoples.map((people: People, index: number) => {
+        return (
+          <li className={styles.staffContent} key={index}>
+            <img className={styles.imgStaff} src={people.image} alt="" />
+            <div className={styles.divContent}>
+              <h3>{people.name}</h3>
+              <p>{people.role}</p>
+              <a className={styles.a} href={people.socialMedia}>
+                {people.socialMedia}
+              </a>
+            </div>
+          </li>
+        )
+      })}
+    </ul>
   )
 }
