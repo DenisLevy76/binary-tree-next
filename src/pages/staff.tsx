@@ -13,19 +13,19 @@ export default function staff() {
     const peoples : People[] = [{
         name : "Michel Ribeiro",
         image : "https://avatars.githubusercontent.com/u/62553511?v=4",
-        role : "Programador",
+        role : "Programmer",
         socialMedia : "https://github.com/MichSide"
     },
     {
         name : "Denis Levy",
         image : "https://avatars.githubusercontent.com/u/62116847?v=4",
-        role : "Programador",
+        role : "Programmer",
         socialMedia : "https://github.com/DenisLevy76"
     },
     {
         name: "Laiça Camila",
         image : "/foto.jpg",
-        role : "Design Gráfico",
+        role : "Graphic design",
         socialMedia : "https://www.instagram.com/luh_naluna16/"
     }]
 
