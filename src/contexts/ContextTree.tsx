@@ -1,6 +1,6 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { randomTree } from '../utils/randomTree';
-import { BFS, NodeTree } from '../utils/tree';
+import { BFS, isBalanced, NodeTree } from '../utils/tree';
 
 interface RawNodeDatum {
   name: string;
@@ -35,6 +35,20 @@ export const ContextTreeProvider: React.FC = ({children}) => {
   const [tree, setTree] = useState(null as NodeTree)
   const [history, setHistory] = useState([])
   let array: number[] = []
+
+  useEffect(() => {
+    if (tree){
+      if (isBalanced(tree)){
+        const msg: msgData = {title: "Is balanced!", body: ""}
+        setHistory((history) => [...history, msg])
+      }
+      else{
+        const msg = {title: "Is not balanced", body: ""}
+        setHistory((history) => [...history, msg])
+      }
+
+    }
+  }, [tree])
 
   function createNewTree(number: number){
     const randomNumbers: number[] = randomTree(number);
@@ -98,7 +112,6 @@ export const ContextTreeProvider: React.FC = ({children}) => {
 
     setHistory((history) => [...history, msg])
   }
-
 
   return (
     <ContextTree.Provider value={{

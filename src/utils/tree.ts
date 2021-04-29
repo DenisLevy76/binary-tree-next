@@ -82,7 +82,7 @@ export function BFS(root: NodeTree){ //breadth-first search
 }
 
 
-function isBalanced(root : NodeTree) {
+export function isBalanced(root : NodeTree) {
   const visited : NodeTree[] = [root];
   const visitedleft : NodeTree[] = [root];
   const visitedright : NodeTree[] = [root];
@@ -110,17 +110,17 @@ function isBalanced(root : NodeTree) {
       if (visited[i].right.right === null && visited[i].right.left === null) {
         i = visited.length;
         break;
-        
+
       }
       else {
         return (false);
-        
+
       }
     }
     if (visited[i].right === null && visited[i].left !== null) {
       if (visited[i].left.left === null && visited[i].left.right === null) {
         i = visited.length;
-        break;  
+        break;
       }
       else {
         return (false);
