@@ -81,6 +81,7 @@ export function BFS(root: NodeTree){ //breadth-first search
   return visited;
 }
 
+
 function isBalanced(root : NodeTree) {
   const visited : NodeTree[] = [root];
   const visitedleft : NodeTree[] = [root];
@@ -101,29 +102,28 @@ function isBalanced(root : NodeTree) {
   let dir = visitedright.length-1;
   let esq = visitedleft.length-1;
   if ((esq - dir) > 1 || (esq - dir) < -1) {
-      console.log("Não está balanceada");
-      i = 10;
-    }
+    i = visited.length;
+    return (false);
+  }
   while (i < visited.length) {
     if (visited[i].left === null && visited[i].right !== null) {
       if (visited[i].right.right === null && visited[i].right.left === null) {
         i = visited.length;
         break;
-
+        
       }
       else {
-        console.log("Não esta Balanceada!");
-        break;
+        return (false);
+        
       }
     }
     if (visited[i].right === null && visited[i].left !== null) {
       if (visited[i].left.left === null && visited[i].left.right === null) {
         i = visited.length;
-        break;
+        break;  
       }
       else {
-        console.log("Não esta Balanceada!");
-        break;
+        return (false);
       }
     }
     else {
@@ -131,7 +131,7 @@ function isBalanced(root : NodeTree) {
     }
   }
   if (i == visited.length) {
-    return console.log("Esta Balanceada!");
+    return (true);
   }
 }
 

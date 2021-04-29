@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Header from '../components/Header';
-// import NavigationBar from '../components/NavigationBar'
+import NavigationBar from '../components/NavigationBar'
 import { ContextTreeProvider } from '../contexts/ContextTree';
 import '../styles/globals.css';
 
@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
     <div>
       <ContextTreeProvider>
         <Header />
-        {/* <NavigationBar/> */}
+        <NavigationBar/>
         <Component {...pageProps} />
       </ContextTreeProvider>
     </div>
