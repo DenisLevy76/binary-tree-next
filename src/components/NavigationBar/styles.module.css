@@ -7,12 +7,12 @@
 }
 
 .separate {
-    padding: 4rem;
+    padding: 0.1rem;
 }
 
 .imgHome {
-    width: 1rem;
-    height: 1rem;
+    width: 1.8rem;
+    height: 1.8rem;
 }
 
 .imgStaff {
@@ -28,5 +28,5 @@
   }
 
 .home{
-    padding: 0 1rem;
+    padding: 0rem;
 }
