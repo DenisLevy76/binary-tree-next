@@ -25,7 +25,7 @@ export default function staff() {
     {
         name: "Laiça Camila",
         image : "/foto.jpg",
-        role : "Design Grafico",
+        role : "Design Gráfico",
         socialMedia : "https://www.instagram.com/luh_naluna16/"
     }]
 
