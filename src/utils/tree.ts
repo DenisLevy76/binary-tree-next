@@ -44,8 +44,20 @@ export class NodeTree{
     const RawNodeDatumRight: RawNodeDatum = this.right?.convertToRawNodeDatum();
     const children = [];
 
-    RawNodeDatumLeft && children.push(RawNodeDatumLeft);
-    RawNodeDatumRight && children.push(RawNodeDatumRight);
+    // RawNodeDatumLeft && children.push(RawNodeDatumLeft);
+    // RawNodeDatumRight && children.push(RawNodeDatumRight);
+
+    if (RawNodeDatumLeft){
+      children.push(RawNodeDatumLeft);
+    }else{
+      children.push({name: ''})
+
+    }
+    if (RawNodeDatumRight){
+      children.push(RawNodeDatumRight);
+    }else{
+      children.push({name: ''})
+    }
 
     if (children.length > 0){
       return {
