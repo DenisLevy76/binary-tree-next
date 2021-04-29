@@ -1,22 +1,15 @@
 import styles from './styles.module.css'
+import Link from 'next/link'
 
 export default function NagivationBar() {
     return (
         <div className={styles.NavContainer}>
-          <a href="/">
-              <div className={styles.rectangle}>
-                  <img className={styles.imgHome}src="/home.png" alt="Home"/>
-                  <a className={styles.home}>Home</a>
-              </div>
-          </a>
-          <a href="/staff">
-              <div className={styles.separate}>
-                  <div className={styles.rectangle}>
-                      <img className={styles.imgStaff}src="/staff.png" alt="Staff"/>
-                      <a>Staff</a>
-                  </div>
-              </div>
-          </a>  
+          <Link href="/">
+            <a className={styles.home} style={{color:"white"}}><img className={styles.imgHome} style={{marginRight:"0.4rem"}}src="/home.svg" alt="Home"/>Home</a>
+          </Link>
+          <Link href="/staff">
+            <a className={styles.home} style={{color:"white"}}><img className={styles.imgStaff} style={{marginRight:"0.5rem"}} src="/staff.svg" alt="Staff"/>Staff</a>
+          </Link>
         </div>
     )
 }

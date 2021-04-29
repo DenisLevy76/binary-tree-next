@@ -1,9 +1,10 @@
 .NavContainer {
-    background: #AFB2B1;
-    height: 2rem;
-    
     display: flex;
+    justify-content: center;
     align-items: center;
+
+    background: #b9a6e7;
+    gap: 2rem;
 }
 
 .separate {
@@ -11,22 +12,19 @@
 }
 
 .imgHome {
+    
     width: 1.8rem;
     height: 1.8rem;
 }
 
 .imgStaff {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1.8rem;
+    height: 1.8rem;
 }
 
-.rectangle {
-    display: inline-block;
-    width: 10rem;
-    height: 2rem;
-    background: white;
-  }
-
 .home{
-    padding: 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
