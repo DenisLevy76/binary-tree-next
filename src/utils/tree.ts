@@ -73,10 +73,10 @@ export class NodeTree{
   }
 
   toString(){
-    const left = this.left?.toString();
-    const rigt = this.right?.toString();
+    const left = this.left ? `${this.left.toString()}` : '';
+    const right = this.right ? `${this.right.toString()}` : '';
 
-    return `${this.value}(left)`
+    return `(${this.value}${left}${right})`
   }
 }
 
