@@ -19,9 +19,10 @@ interface createContextData{
   tree: NodeTree;
   history: msgData[];
   createNewTree: (number: number) => void;
-  handleButtonPreOrder: () => void;
-  handleButtonInOrder: () => void;
-  handleButtonPostOrder: () => void;
+  preOrder: (root: NodeTree) => void;
+  inOrder: (root: NodeTree) => void;
+  postOrder: (root: NodeTree) => void;
+  handleButtonClick: (msgTitle: string, callback: (tree: NodeTree) => void) => void;
   handleButtonBFS: () => void;
 }
 
@@ -59,16 +60,6 @@ export const ContextTreeProvider: React.FC = ({children}) => {
     preOrder(root.right)
   }
 
-  function handleButtonPreOrder(){
-    array = [];
-    preOrder(tree)
-
-    const stringfyArray = array.join(', ')
-    const msg: msgData = {title: "Pré-ordem:", body: stringfyArray}
-
-    setHistory((history) => [...history, msg])
-  }
-
   function inOrder(root: NodeTree){
     if (!root){
       return
@@ -77,16 +68,6 @@ export const ContextTreeProvider: React.FC = ({children}) => {
     inOrder(root.left)
     array.push(root.value);
     inOrder(root.right)
-  }
-
-  function handleButtonInOrder(){
-    array = [];
-    inOrder(tree)
-
-    const stringfyArray = array.join(', ')
-    const msg: msgData = {title: "Em ordem:", body: stringfyArray}
-
-    setHistory((history) => [...history, msg])
   }
 
   function postOrder(root: NodeTree){
@@ -99,12 +80,12 @@ export const ContextTreeProvider: React.FC = ({children}) => {
     array.push(root.value);
   }
 
-  function handleButtonPostOrder(){
+  function handleButtonClick(msgTitle: string, callback: (tree: NodeTree) => void){
     array = [];
-    postOrder(tree)
+    callback(tree)
 
     const stringfyArray = array.join(', ')
-    const msg: msgData = {title: "Pós-ordem:", body: stringfyArray}
+    const msg: msgData = {title: msgTitle, body: stringfyArray}
 
     setHistory((history) => [...history, msg])
   }
@@ -126,9 +107,10 @@ export const ContextTreeProvider: React.FC = ({children}) => {
       tree,
       history,
       createNewTree,
-      handleButtonPreOrder,
-      handleButtonInOrder,
-      handleButtonPostOrder,
+      preOrder,
+      inOrder,
+      postOrder,
+      handleButtonClick,
       handleButtonBFS,
     }}>
       {children}

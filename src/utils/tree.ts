@@ -59,6 +59,13 @@ export class NodeTree{
       } as RawNodeDatum;
     }
   }
+
+  toString(){
+    const left = this.left?.toString();
+    const rigt = this.right?.toString();
+
+    return `${this.value}(left)`
+  }
 }
 
 
