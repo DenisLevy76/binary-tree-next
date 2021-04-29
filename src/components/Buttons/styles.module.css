@@ -38,6 +38,8 @@
 .button{
   font-family: Zen Dots;
 
+  outline: none;
+
   width: 100%;
 
   height: 100%;
