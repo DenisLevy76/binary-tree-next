@@ -39,11 +39,11 @@ export const ContextTreeProvider: React.FC = ({children}) => {
   useEffect(() => {
     if (tree){
       if (isBalanced(tree)){
-        const msg: msgData = {title: "Is balanced!", body: ""}
+        const msg: msgData = {title: "Tree created", body: "balanced"}
         setHistory((history) => [...history, msg])
       }
       else{
-        const msg = {title: "Is not balanced", body: ""}
+        const msg = {title: "Tree created", body: "Unbalanced"}
         setHistory((history) => [...history, msg])
       }
 
