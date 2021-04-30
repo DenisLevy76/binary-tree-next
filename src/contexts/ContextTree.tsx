@@ -9,7 +9,7 @@ interface RawNodeDatum {
 }
 
 interface msgData{
-  title: string;
+  title?: string;
   body: string;
 }
 
@@ -36,17 +36,20 @@ export const ContextTreeProvider: React.FC = ({children}) => {
 
   useEffect(() => {
     if (tree){
+      sendMsg("Tree created", tree.toString())
       if (isBalanced(tree)){
-        const msg: msgData = {title: "Tree created", body: `${tree.toString()}Balanced`}
-        setHistory((history) => [...history, msg])
+        sendMsg('', 'Balanced')
       }
       else{
-        const msg = {title: "Tree created", body: `${tree.toString()}\nUnbalanced`}
-        setHistory((history) => [...history, msg])
+        sendMsg('', 'Unbalanced')
       }
-
     }
   }, [tree])
+
+  function sendMsg(title: string = '', body: string){
+    const msg: msgData = {title, body}
+    setHistory((history) => [...history, msg])
+  }
 
   function createNewTree(number: number){
     const randomNumbers: number[] = randomTree(number);
@@ -97,18 +100,15 @@ export const ContextTreeProvider: React.FC = ({children}) => {
     callback(tree)
 
     const stringfyArray = array.join(', ')
-    const msg: msgData = {title: msgTitle, body: stringfyArray}
 
-    setHistory((history) => [...history, msg])
+    sendMsg(msgTitle, stringfyArray)
   }
 
   function handleButtonBFS(){
     const BFSlist = BFS(tree)
     const stringfy  = BFSlist.map(node => node.value).join(', ')
 
-    const msg: msgData = {title: "Em largura:", body: stringfy}
-
-    setHistory((history) => [...history, msg])
+    sendMsg("Em largura:", stringfy)
   }
 
   return (

@@ -1,7 +1,7 @@
-import Header from '../components/Header'
 import React from 'react'
 import styles from '../styles/staff.module.css'
 import StaffComponent from '../components/StaffComponent'
+import Head from 'next/head'
 interface People{
     name : string;
     image : string;
@@ -31,8 +31,10 @@ export default function staff() {
 
     return (
         <div className={styles.container}>
-            <StaffComponent peoples={peoples}/>
-
+          <Head>
+            <title>Binary Tree | Staff</title>
+          </Head>
+          <StaffComponent peoples={peoples}/>
         </div>
     )
 }
