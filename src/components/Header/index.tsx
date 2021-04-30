@@ -1,4 +1,5 @@
 import styles from './styles.module.css'
+import Link from 'next/link'
 export default function Header() {
     return (
         <div>
@@ -8,7 +9,7 @@ export default function Header() {
             </a>
         </header>
         </div>
-        
-        
+
+
     )
 }

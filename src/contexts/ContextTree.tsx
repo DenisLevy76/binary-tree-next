@@ -1,6 +1,6 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { randomTree } from '../utils/randomTree';
-import { BFS, NodeTree } from '../utils/tree';
+import { BFS, isBalanced, NodeTree } from '../utils/tree';
 
 interface RawNodeDatum {
   name: string;
@@ -9,12 +9,11 @@ interface RawNodeDatum {
 }
 
 interface msgData{
-  title: string;
+  title?: string;
   body: string;
 }
 
 interface createContextData{
-  numberOfNodes: number;
   treeRawNodeDatum: RawNodeDatum;
   tree: NodeTree;
   history: msgData[];
@@ -30,11 +29,27 @@ interface createContextData{
 export const ContextTree = createContext({} as createContextData)
 
 export const ContextTreeProvider: React.FC = ({children}) => {
-  const [numberOfNodes, setNumberOfNodes] = useState(0);
   const [treeRawNodeDatum, setTreeRawNodeDatum] = useState(null as RawNodeDatum)
   const [tree, setTree] = useState(null as NodeTree)
   const [history, setHistory] = useState([])
   let array: number[] = []
+
+  useEffect(() => {
+    if (tree){
+      sendMsg("Tree created", tree.toString())
+      if (isBalanced(tree)){
+        sendMsg('', 'Balanced')
+      }
+      else{
+        sendMsg('', 'Unbalanced')
+      }
+    }
+  }, [tree])
+
+  function sendMsg(title: string = '', body: string){
+    const msg: msgData = {title, body}
+    setHistory((history) => [...history, msg])
+  }
 
   function createNewTree(number: number){
     const randomNumbers: number[] = randomTree(number);
@@ -85,24 +100,19 @@ export const ContextTreeProvider: React.FC = ({children}) => {
     callback(tree)
 
     const stringfyArray = array.join(', ')
-    const msg: msgData = {title: msgTitle, body: stringfyArray}
 
-    setHistory((history) => [...history, msg])
+    sendMsg(msgTitle, stringfyArray)
   }
 
   function handleButtonBFS(){
     const BFSlist = BFS(tree)
     const stringfy  = BFSlist.map(node => node.value).join(', ')
 
-    const msg: msgData = {title: "Em largura:", body: stringfy}
-
-    setHistory((history) => [...history, msg])
+    sendMsg("Em largura:", stringfy)
   }
-
 
   return (
     <ContextTree.Provider value={{
-      numberOfNodes,
       treeRawNodeDatum,
       tree,
       history,

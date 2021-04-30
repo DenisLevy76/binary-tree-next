@@ -44,8 +44,20 @@ export class NodeTree{
     const RawNodeDatumRight: RawNodeDatum = this.right?.convertToRawNodeDatum();
     const children = [];
 
-    RawNodeDatumLeft && children.push(RawNodeDatumLeft);
-    RawNodeDatumRight && children.push(RawNodeDatumRight);
+    // RawNodeDatumLeft && children.push(RawNodeDatumLeft);
+    // RawNodeDatumRight && children.push(RawNodeDatumRight);
+
+    if (RawNodeDatumLeft){
+      children.push(RawNodeDatumLeft);
+    }else{
+      children.push({name: ''})
+
+    }
+    if (RawNodeDatumRight){
+      children.push(RawNodeDatumRight);
+    }else{
+      children.push({name: ''})
+    }
 
     if (children.length > 0){
       return {
@@ -61,10 +73,10 @@ export class NodeTree{
   }
 
   toString(){
-    const left = this.left?.toString();
-    const rigt = this.right?.toString();
+    const left = this.left ? `${this.left.toString()}` : '';
+    const right = this.right ? `${this.right.toString()}` : '';
 
-    return `${this.value}(left)`
+    return `(${this.value}${left}${right})`
   }
 }
 
@@ -82,7 +94,7 @@ export function BFS(root: NodeTree){ //breadth-first search
 }
 
 
-function isBalanced(root : NodeTree) {
+export function isBalanced(root : NodeTree) {
   const visited : NodeTree[] = [root];
   const visitedleft : NodeTree[] = [root];
   const visitedright : NodeTree[] = [root];
@@ -110,17 +122,17 @@ function isBalanced(root : NodeTree) {
       if (visited[i].right.right === null && visited[i].right.left === null) {
         i = visited.length;
         break;
-        
+
       }
       else {
         return (false);
-        
+
       }
     }
     if (visited[i].right === null && visited[i].left !== null) {
       if (visited[i].left.left === null && visited[i].left.right === null) {
         i = visited.length;
-        break;  
+        break;
       }
       else {
         return (false);

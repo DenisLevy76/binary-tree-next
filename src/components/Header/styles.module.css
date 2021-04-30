@@ -1,12 +1,10 @@
 .headerContainer {
     background: #9F75FF;
     height: 4.5rem;
-    
+
     display: flex;
     align-items: center;
     padding: 2rem 2rem;
-
-    border-bottom: 1px solid #AFB2B1;
 }
 
 .img {
