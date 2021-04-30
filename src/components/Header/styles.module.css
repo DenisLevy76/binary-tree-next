@@ -11,3 +11,9 @@
     width: 16.3rem;
     height: 3.8rem;
 }
+
+@media (max-width: 1080px) {
+    .headerContainer {
+        justify-content: center;
+    }
+}
