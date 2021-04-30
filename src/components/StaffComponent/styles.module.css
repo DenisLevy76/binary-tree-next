@@ -5,6 +5,7 @@
   border-radius: 1.5rem;
   align-items: center;
   width: 80%;
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.137);
 }
 
 .imgStaff {
@@ -35,4 +36,23 @@
 
 .a:hover{
   text-decoration: underline;
+}
+
+@media (max-width: 375px) {
+  .divContent {
+    margin: 1rem;
+  }
+  .staffContent {
+    width: 100%;
+  }
+  .ulContent {
+    gap: 0.3rem;
+  }
+}
+
+@media (max-width: 321px) {
+  .imgStaff {
+    width: 5rem;
+    height: 5rem;
+  }
 }
