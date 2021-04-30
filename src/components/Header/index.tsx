@@ -4,7 +4,7 @@ export default function Header() {
         <div>
             <header className={styles.headerContainer}>
             <a href="/">
-                <img className={styles.img} src="/logo.png" alt="BinaryTree"/>
+                <img className={styles.img} src="/logo.png" alt="Binary Tree"/>
             </a>
         </header>
         </div>

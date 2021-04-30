@@ -23,7 +23,7 @@ export default function staff() {
         socialMedia : "https://github.com/DenisLevy76"
     },
     {
-        name: "Laiça Camila",
+        name: "Laíça Camila",
         image : "/foto.jpg",
         role : "Design Grafico",
         socialMedia : "https://www.instagram.com/luh_naluna16/"
