@@ -17,7 +17,7 @@ const History: React.FC = () => {
       <ul className={styles.ul} ref={liRef}>
         {history.map((msg, index) => (
             <li key={index} className={styles.li}>
-              <h3 className={styles.h3}>{msg.title}</h3>
+              {styles.h3 && <h3 className={styles.h3}>{msg.title}</h3>}
               <p className={styles.p}>{msg.body}</p>
             </li>
           )

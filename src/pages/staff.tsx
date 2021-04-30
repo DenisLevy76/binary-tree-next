@@ -1,8 +1,8 @@
-import Header from '../components/Header'
 import React from 'react'
 import styles from '../styles/staff.module.css'
 import StaffComponent from '../components/StaffComponent'
-interface Pessoa{
+import Head from 'next/head'
+interface People{
     name : string;
     image : string;
     role : string;
@@ -10,43 +10,31 @@ interface Pessoa{
 }
 
 export default function staff() {
-    const pessoas : Pessoa[] = [{
+    const peoples : People[] = [{
         name : "Michel Ribeiro",
         image : "https://avatars.githubusercontent.com/u/62553511?v=4",
-        role : "Programador",
+        role : "Programmer",
         socialMedia : "https://github.com/MichSide"
     },
     {
         name : "Denis Levy",
         image : "https://avatars.githubusercontent.com/u/62116847?v=4",
-        role : "Programador",
+        role : "Programmer",
         socialMedia : "https://github.com/DenisLevy76"
     },
     {
         name: "Laiça Camila",
         image : "/foto.jpg",
-        role : "Design Grafico",
+        role : "Graphic design",
         socialMedia : "https://www.instagram.com/luh_naluna16/"
     }]
+
     return (
-        <div>
-            <ul className={styles.ulContent}>
-            {
-                pessoas.map((element : Pessoa, index : number) => {
-                    return (
-                        <li className={styles.staffContent} key={index}>
-                            <img className={styles.imgStaff} src={element.image} alt=""/> 
-                            <div className={styles.divContent}>
-                                <h3>{element.name}</h3>
-                                <p>{element.role}</p>
-                                <a className={styles.a} href={element.socialMedia}>{element.socialMedia}</a>
-                            </div>
-                        </li>
-                    )
-                })
-            }
-            </ul>
-            
+        <div className={styles.container}>
+          <Head>
+            <title>Binary Tree | Staff</title>
+          </Head>
+          <StaffComponent peoples={peoples}/>
         </div>
     )
 }

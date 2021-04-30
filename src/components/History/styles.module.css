@@ -23,6 +23,9 @@
   height: 87%;
 
   overflow-y: scroll;
+  overflow-x: scroll;
+
+  white-space: nowrap;
 
   padding: 1rem;
 
@@ -35,7 +38,8 @@
 
 }
 .ul::-webkit-scrollbar {
-  width: 6px;
+  width: 12px;
+  height: 12px;
   background: #F4F4F4;
   position: relative;
   right: 100px;

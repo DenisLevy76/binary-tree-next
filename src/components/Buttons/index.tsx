@@ -9,13 +9,13 @@ const Buttons: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.h2}>Algoritmos</h2>
-      <input type="number" className={styles.inputNumber} onChange={(e) => setNNodes(Number(e.target.value))} placeholder="Número de nós"/>
-      <button type="button" className={styles.button} onClick={() => createNewTree(nNodes)}>Gerar árvore</button>
-      <button type="button" className={styles.button} onClick={() => handleButtonClick("Pré-ordem:", preOrder)}>Pré-ordem</button>
-      <button type="button" className={styles.button} onClick={() => handleButtonClick("Em ordem:", inOrder)}>Em ordem</button>
-      <button type="button" className={styles.button} onClick={() => handleButtonClick("Pós-ordem", postOrder)}>Pós-ordem</button>
-      <button type="button" className={styles.button} onClick={handleButtonBFS}>Em largura</button>
+      <h2 className={styles.h2}>Algorithm</h2>
+      <input type="number" className={styles.inputNumber} onChange={(e) => setNNodes(Number(e.target.value))} placeholder="Number of nodes"/>
+      <button type="button" className={styles.button} onClick={() => createNewTree(nNodes)}>Create tree</button>
+      <button type="button" className={styles.button} onClick={() => handleButtonClick("Pré-ordem:", preOrder)}>Pre order</button>
+      <button type="button" className={styles.button} onClick={() => handleButtonClick("Em ordem:", inOrder)}>In order</button>
+      <button type="button" className={styles.button} onClick={() => handleButtonClick("Pós-ordem", postOrder)}>Post order</button>
+      <button type="button" className={styles.button} onClick={handleButtonBFS}>breadth-first search</button>
     </div>
   );
 }
