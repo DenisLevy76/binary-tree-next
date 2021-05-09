@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { randomTree } from '../utils/randomTree';
-import { BFS, isBalanced, NodeTree } from '../utils/tree';
+import { isBalanced, NodeTree } from '../utils/tree';
 
 interface RawNodeDatum {
   name: string;
@@ -105,10 +105,10 @@ export const ContextTreeProvider: React.FC = ({children}) => {
   }
 
   function handleButtonBFS(){
-    const BFSlist = BFS(tree)
+    const BFSlist = tree.BFS()
     const stringfy  = BFSlist.map(node => node.value).join(', ')
 
-    sendMsg("Em largura:", stringfy)
+    sendMsg("breadth-first search", stringfy)
   }
 
   return (

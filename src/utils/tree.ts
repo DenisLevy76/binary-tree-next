@@ -39,6 +39,18 @@ export class NodeTree{
     console.log(this.value);
   }
 
+  BFS(){ //breadth-first search
+    const visited : NodeTree[] = [this];
+    let i = 0;
+    while(i < visited.length){
+      visited[i].left && visited.push(visited[i].left);
+      visited[i].right && visited.push(visited[i].right);
+      i++;
+    }
+
+    return visited;
+  }
+
   convertToRawNodeDatum(){
     const RawNodeDatumLeft: RawNodeDatum = this.left?.convertToRawNodeDatum();
     const RawNodeDatumRight: RawNodeDatum = this.right?.convertToRawNodeDatum();
@@ -79,20 +91,6 @@ export class NodeTree{
     return `(${this.value}${left}${right})`
   }
 }
-
-
-export function BFS(root: NodeTree){ //breadth-first search
-  const visited : NodeTree[] = [root];
-  let i = 0;
-  while(i < visited.length){
-    visited[i].left && visited.push(visited[i].left);
-    visited[i].right && visited.push(visited[i].right);
-    i++;
-  }
-
-  return visited;
-}
-
 
 export function isBalanced(root : NodeTree) {
   const visited : NodeTree[] = [root];

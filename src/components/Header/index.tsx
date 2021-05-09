@@ -9,9 +9,8 @@ export default function Header() {
                   <img className={styles.img} src="/logo.png" alt="Binary Tree"/>
               </a>
             </Link>
+            <a href="https://github.com/DenisLevy76/binary-tree-next" target="_blank"><img src="/GitHub-Mark-Light-120px-plus.png" className={styles.github} alt="Github"/></a>
         </header>
         </div>
-
-
     )
 }
