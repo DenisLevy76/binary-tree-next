@@ -52,6 +52,10 @@ export const ContextTreeProvider: React.FC = ({children}) => {
   }
 
   function createNewTree(number: number){
+    if (!number){
+      alert('Enter the number of nodes')
+      return
+    }
     const randomNumbers: number[] = randomTree(number);
     const newTree: NodeTree = new NodeTree(randomNumbers[0]);
 
@@ -96,6 +100,9 @@ export const ContextTreeProvider: React.FC = ({children}) => {
   }
 
   function handleButtonClick(msgTitle: string, callback: (tree: NodeTree) => void){
+    if(!tree){
+      return
+    }
     array = [];
     callback(tree)
 
@@ -105,6 +112,9 @@ export const ContextTreeProvider: React.FC = ({children}) => {
   }
 
   function handleButtonBFS(){
+    if(!tree){
+      return
+    }
     const BFSlist = tree.BFS()
     const stringfy  = BFSlist.map(node => node.value).join(', ')
 
