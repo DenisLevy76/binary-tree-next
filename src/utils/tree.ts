@@ -92,56 +92,28 @@ export class NodeTree{
   }
 }
 
-export function isBalanced(root : NodeTree) {
-  const visited : NodeTree[] = [root];
-  const visitedleft : NodeTree[] = [root];
-  const visitedright : NodeTree[] = [root];
-  let i = 0;
-  while(i < visited.length){
-    visited[i].left && visited.push(visited[i].left);
-    visited[i].right && visited.push(visited[i].right); // poe todos os elementos em uma lista
-    i++;
-  }
-  i = 0;
-  while(i < visitedleft.length && visitedright.length > i){
-      visitedleft[i].left && visitedleft.push(visitedleft[i].left);
-      visitedright[i].right && visitedright.push(visitedright[i].right); // poe o nó raiz e todas as extremidas em uma lista
-      i++;
-    }
-  i = 0;
-  let dir = visitedright.length-1;
-  let esq = visitedleft.length-1;
-  if ((esq - dir) > 1 || (esq - dir) < -1) {
-    i = visited.length;
-    return (false);
-  }
-  while (i < visited.length) {
-    if (visited[i].left === null && visited[i].right !== null) {
-      if (visited[i].right.right === null && visited[i].right.left === null) {
-        i = visited.length;
-        break;
+export var Check = {
 
-      }
-      else {
-        return (false);
+  getHeight : function (root: NodeTree) {
+    if (root === null) {
+      return 0; 
+    } 
+    // console.log(Math.max(Check.getHeight(root.left), Check.getHeight(root.right)) + 1);
+    return Math.max(Check.getHeight(root.left), Check.getHeight(root.right)) + 1;
+  },
 
-      }
+  isBalanced : function (root: NodeTree) {
+    if (root === null) {
+      return true;
     }
-    if (visited[i].right === null && visited[i].left !== null) {
-      if (visited[i].left.left === null && visited[i].left.right === null) {
-        i = visited.length;
-        break;
-      }
-      else {
-        return (false);
-      }
-    }
-    else {
-      i++;
+    var heightDifference = Math.abs(Check.getHeight(root.left) - Check.getHeight(root.right));
+    // console.log(heightDifference);
+    if (heightDifference > 1) {
+      return false;
+    } else {
+      return Check.isBalanced(root.left) && Check.isBalanced(root.right);
     }
   }
-  if (i == visited.length) {
-    return (true);
-  }
-}
+
+};
 
