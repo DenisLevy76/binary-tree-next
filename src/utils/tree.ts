@@ -114,6 +114,5 @@ export var Check = {
       return Check.isBalanced(root.left) && Check.isBalanced(root.right);
     }
   }
-
 };
 
