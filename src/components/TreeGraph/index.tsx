@@ -1,7 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import dynamic from 'next/dynamic'
-// import { randomTree } from '../../utils/randomTree';
-// import { NodeTree } from '../../utils/tree';
 
 import styles from './styles.module.css'
 import { ContextTree } from '../../contexts/ContextTree';
