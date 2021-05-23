@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { randomTree } from '../utils/randomTree';
-import { Check, NodeTree } from '../utils/tree';
+import { NodeTree } from '../utils/tree';
+
 
 interface RawNodeDatum {
   name: string;
@@ -37,7 +38,7 @@ export const ContextTreeProvider: React.FC = ({children}) => {
   useEffect(() => {
     if (tree){
       sendMsg("Tree created", tree.toString())
-      if (Check.isBalanced(tree)){
+      if (tree.isBalanced()){
         sendMsg('', 'Balanced')
       }
       else{

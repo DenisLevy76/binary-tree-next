@@ -84,6 +84,33 @@ export class NodeTree{
     }
   }
 
+  getHeight(){
+    const left = this.left?.getHeight() || 0;
+    const right = this.right?.getHeight() || 0;
+
+    if (left > right) return left + 1;
+    else return right + 1;
+  }
+
+  getBalanceFactor(){
+    const leftHeight = this.left?.getHeight() || 0;
+    const rightHeight = this.right?.getHeight() || 0;
+
+    return Math.abs(leftHeight - rightHeight);
+  }
+
+  isBalanced(){
+    //is leaf?
+    if(this.left === null && this.right === null) return true;
+
+    // if the current node's balancing factor is less than 1 and the right and left sides are balanced, return true
+    // (Gambiarra: when there is no side it 't doesnexecute isBalanced because of the "?" Sign, so it returns undefined. Since the
+    // side does not exist there is no way it is unbalanced so I consider this case to be valid.)
+    return (this.left?.isBalanced() || this.left?.isBalanced() == undefined) &&
+      (this.right?.isBalanced() || this.right?.isBalanced() == undefined) &&
+      this.getBalanceFactor() <= 1;
+  }
+
   toString(){
     const left = this.left ? `${this.left.toString()}` : '';
     const right = this.right ? `${this.right.toString()}` : '';
@@ -91,28 +118,3 @@ export class NodeTree{
     return `(${this.value}${left}${right})`
   }
 }
-
-export var Check = {
-
-  getHeight : function (root: NodeTree) {
-    if (root === null) {
-      return 0; 
-    } 
-    // console.log(Math.max(Check.getHeight(root.left), Check.getHeight(root.right)) + 1);
-    return Math.max(Check.getHeight(root.left), Check.getHeight(root.right)) + 1;
-  },
-
-  isBalanced : function (root: NodeTree) {
-    if (root === null) {
-      return true;
-    }
-    var heightDifference = Math.abs(Check.getHeight(root.left) - Check.getHeight(root.right));
-    // console.log(heightDifference);
-    if (heightDifference > 1) {
-      return false;
-    } else {
-      return Check.isBalanced(root.left) && Check.isBalanced(root.right);
-    }
-  }
-};
-
