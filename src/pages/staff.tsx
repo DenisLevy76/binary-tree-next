@@ -14,7 +14,7 @@ export default function staff() {
         name : "Michel Ribeiro",
         image : "https://avatars.githubusercontent.com/u/62553511?v=4",
         role : "Programmer",
-        socialMedia : "https://github.com/MichSide"
+        socialMedia : "https://github.com/MichelRibeiro48"
     },
     {
         name : "Denis Levy",
