@@ -15,7 +15,7 @@ export class NodeTree{
 
   insert(value: number){
     if (this.value){
-      if(value > this.value){
+      if(value < this.value){
         this.left? this.left.insert(value) : this.left = new NodeTree(value)
       }else{
         this.right? this.right.insert(value) : this.right = new NodeTree(value)
