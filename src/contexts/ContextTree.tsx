@@ -103,6 +103,7 @@ export const ContextTreeProvider: React.FC = ({children}) => {
     if(!tree){
       return
     }
+
     array = [];
     callback(tree)
 

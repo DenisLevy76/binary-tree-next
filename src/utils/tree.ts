@@ -16,9 +16,9 @@ export class NodeTree{
   insert(value: number){
     if (this.value){
       if(value > this.value){
-        this.right? this.right.insert(value) : this.right = new NodeTree(value)
-      }else{
         this.left? this.left.insert(value) : this.left = new NodeTree(value)
+      }else{
+        this.right? this.right.insert(value) : this.right = new NodeTree(value)
       }
     }
   }
@@ -28,11 +28,13 @@ export class NodeTree{
     this.left?.preOrder();
     this.right?.preOrder();
   }
+
   inOrder(){
     this.left?.inOrder();
     console.log(this.value);
     this.right?.inOrder();
   }
+
   postOrder(){
     this.left?.postOrder();
     this.right?.postOrder();
@@ -54,17 +56,14 @@ export class NodeTree{
   convertToRawNodeDatum(){
     const RawNodeDatumLeft: RawNodeDatum = this.left?.convertToRawNodeDatum();
     const RawNodeDatumRight: RawNodeDatum = this.right?.convertToRawNodeDatum();
-    const children = [];
-
-    // RawNodeDatumLeft && children.push(RawNodeDatumLeft);
-    // RawNodeDatumRight && children.push(RawNodeDatumRight);
+    const children:RawNodeDatum[]  = [];
 
     if (RawNodeDatumLeft){
       children.push(RawNodeDatumLeft);
     }else{
       children.push({name: ''})
-
     }
+
     if (RawNodeDatumRight){
       children.push(RawNodeDatumRight);
     }else{
@@ -103,9 +102,10 @@ export class NodeTree{
     //is leaf?
     if(this.left === null && this.right === null) return true;
 
-    // if the current node's balancing factor is less than 1 and the right and left sides are balanced, return true
+    // if the right and left sides are balanced and the current node's balancing factor is less than 1, return true
     // (Gambiarra: when there is no side it 't doesnexecute isBalanced because of the "?" Sign, so it returns undefined. Since the
     // side does not exist there is no way it is unbalanced so I consider this case to be valid.)
+
     return (this.left?.isBalanced() || this.left?.isBalanced() == undefined) &&
       (this.right?.isBalanced() || this.right?.isBalanced() == undefined) &&
       this.getBalanceFactor() <= 1;
