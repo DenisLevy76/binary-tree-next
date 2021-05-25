@@ -21,7 +21,11 @@
   overflow-x: hidden;
 }
 
-.ulContent{
+.p {
+  margin-bottom: 0.8rem;
+}
+
+.ulContent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,11 +34,10 @@
 }
 
 .a {
-  color: #9F75FF;
-  margin-top: 0.8rem;
+  color: #9f75ff;
 }
 
-.a:hover{
+.a:hover {
   text-decoration: underline;
 }
 

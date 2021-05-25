@@ -21,13 +21,13 @@ export default function staff() {
         name : "Denis Levy",
         image : "https://avatars.githubusercontent.com/u/62116847?v=4",
         role : "Programmer",
-        socialMedia : ["https://github.com/DenisLevy76", "https://www.linkedin.com/in/d%C3%AAnis-levy-b34a951a5/"]
+        socialMedia : ["https://github.com/DenisLevy76", "https://linkedin.com/in/d%C3%AAnis-levy-b34a951a5"]
     },
     {
         name: "Laíça Camila",
         image : "/foto.jpg",
         role : "Graphic Design",
-        socialMedia : ["https://www.instagram.com/luh_naluna16/"]
+        socialMedia : ["https://instagram.com/luh_naluna16"]
     }]
 
     return (

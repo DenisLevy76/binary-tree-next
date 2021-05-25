@@ -21,10 +21,10 @@ export default function StaffComponent({ peoples }: StaffComponentProps) {
             <img className={styles.imgStaff} src={people.image} alt="" />
             <div className={styles.divContent}>
               <h3>{people.name}</h3>
-              <p>{people.role}</p>
+              <p className={styles.p}>{people.role}</p>
               {people.socialMedia.map((link, index) => (
                 <a className={styles.a} key={index} href={link}>
-                  {link}
+                  {link.slice(8, link.length)}
                 </a>
               ))}
             </div>
