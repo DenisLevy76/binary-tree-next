@@ -1,26 +1,13 @@
-import React, { useContext } from "react"
+import React from "react"
 import styles from "../styles/Home.module.css"
 import Buttons from "../components/Buttons"
 import History from "../components/History"
 import Head from "next/head"
-import ReactModal from 'react-modal'
-import { ContextTree } from "../contexts/ContextTree"
 import { TreeGraph } from "../components/TreeGraph"
 
 export default function Home() {
-  const { handleModalClose, setHandleModalClose } = useContext(ContextTree)
-
   return (
     <div className={styles.containerIndex}>
-      <ReactModal
-        style={{content: {overflow: 'hidden'}}}
-        isOpen={handleModalClose}
-        onRequestClose={() => setHandleModalClose(c => !c)}
-        shouldCloseOnEsc={true}
-        ariaHideApp={false}
-      >
-        <TreeGraph modal={true}/>
-      </ReactModal>
       <Head>
         <title>Binary Tree | Home</title>
       </Head>
