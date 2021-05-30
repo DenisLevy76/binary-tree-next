@@ -56,7 +56,7 @@ export const ContextTreeProvider: React.FC = ({children}) => {
   }
 
   function createNewTree(number: number){
-    if (!number){
+    if (!number || number <= 0){
       alert('Enter the number of nodes')
       return
     }
