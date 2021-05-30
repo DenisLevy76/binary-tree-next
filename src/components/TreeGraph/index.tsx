@@ -1,8 +1,7 @@
-import React, { ReactNode, useContext, useState } from "react"
+import React, { ReactNode, useState } from "react"
 import dynamic from "next/dynamic"
 
 import styles from "./styles.module.css"
-import { ContextTree } from "../../contexts/ContextTree"
 import { CgMaximizeAlt } from "react-icons/cg"
 import { FiX } from "react-icons/fi"
 
