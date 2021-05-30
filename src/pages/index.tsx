@@ -8,13 +8,15 @@ import { ContextTree } from "../contexts/ContextTree"
 import { TreeGraph } from "../components/TreeGraph"
 
 export default function Home() {
-  const { handleModalClose } = useContext(ContextTree)
+  const { handleModalClose, setHandleModalClose } = useContext(ContextTree)
 
   return (
     <div className={styles.containerIndex}>
       <ReactModal
         style={{content: {overflow: 'hidden'}}}
         isOpen={handleModalClose}
+        onRequestClose={() => setHandleModalClose(c => !c)}
+        shouldCloseOnEsc={true}
         ariaHideApp={false}
       >
         <TreeGraph modal={true}/>
