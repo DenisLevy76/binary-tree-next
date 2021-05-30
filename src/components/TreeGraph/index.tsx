@@ -79,7 +79,7 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
               x: 240,
               y: 30
             }}
-            nodeSize={{ x: 130, y: 180 }}
+            nodeSize={{ x: 180, y: 190 }}
           />
         )}
       </div>
