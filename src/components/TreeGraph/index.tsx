@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { ReactNode, useContext, useState } from "react"
 import dynamic from "next/dynamic"
 
 import styles from "./styles.module.css"
@@ -10,12 +10,19 @@ import ReactModal from "react-modal"
 
 const Tree = dynamic(() => import("react-d3-tree"))
 
-export const TreeGraph: React.FC = () => {
-  const [handleModalClose, setHandleModalClose] = useState(false)
+interface RawNodeDatum {
+  name: string;
+  attributes?: Record<string, string>;
+  children?: RawNodeDatum[];
+}
 
-  const {
-    treeRawNodeDatum,
-  } = useContext(ContextTree)
+interface TreeGraphProps{
+  data: RawNodeDatum;
+  children?: ReactNode
+}
+
+export const TreeGraph = ({ data }: TreeGraphProps) => {
+  const [handleModalClose, setHandleModalClose] = useState(false)
 
   return (
     <div>
@@ -33,14 +40,14 @@ export const TreeGraph: React.FC = () => {
           <button
             type="button"
             className={styles.button}
-            disabled={!treeRawNodeDatum}
+            disabled={!data}
             onClick={() => setHandleModalClose(c => !c)}
           >
             {handleModalClose ? <FiX /> : <CgMaximizeAlt />}
           </button>
-          {treeRawNodeDatum && (
+          {data && (
             <Tree
-              data={treeRawNodeDatum}
+              data={data}
               orientation="vertical"
               translate={{
                 x: 240,
@@ -59,14 +66,14 @@ export const TreeGraph: React.FC = () => {
         <button
           type="button"
           className={styles.button}
-          disabled={!treeRawNodeDatum}
+          disabled={!data}
           onClick={() => setHandleModalClose(c => !c)}
         >
           {handleModalClose ? <FiX /> : <CgMaximizeAlt />}
         </button>
-        {treeRawNodeDatum && (
+        {data && (
           <Tree
-            data={treeRawNodeDatum}
+            data={data}
             orientation="vertical"
             translate={{
               x: 240,
