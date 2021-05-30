@@ -1,4 +1,4 @@
-import React, { ReactChild, ReactNode, useContext } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import dynamic from 'next/dynamic'
 
 import styles from './styles.module.css'
