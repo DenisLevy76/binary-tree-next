@@ -31,11 +31,11 @@ a {
 
 }
 
-button:hover{
+button:hover:not(:disabled){
   cursor: pointer;
 }
 
-button:active{
+button:active:not(:disabled){
   transform: scale(0.9);
 }
 
