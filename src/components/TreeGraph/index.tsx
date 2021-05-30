@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import dynamic from "next/dynamic"
 
 import styles from "./styles.module.css"
@@ -11,10 +11,10 @@ import ReactModal from "react-modal"
 const Tree = dynamic(() => import("react-d3-tree"))
 
 export const TreeGraph: React.FC = () => {
+  const [handleModalClose, setHandleModalClose] = useState(false)
+
   const {
     treeRawNodeDatum,
-    handleModalClose,
-    setHandleModalClose
   } = useContext(ContextTree)
 
   return (

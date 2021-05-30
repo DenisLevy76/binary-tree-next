@@ -17,7 +17,6 @@ interface msgData{
 interface createContextData{
   treeRawNodeDatum: RawNodeDatum;
   tree: NodeTree;
-  handleModalClose: boolean;
   history: msgData[];
   createNewTree: (number: number) => void;
   preOrder: (root: NodeTree) => void;
@@ -25,7 +24,6 @@ interface createContextData{
   postOrder: (root: NodeTree) => void;
   handleButtonClick: (msgTitle: string, callback: (tree: NodeTree) => void) => void;
   handleButtonBFS: () => void;
-  setHandleModalClose: (value) => void;
 }
 
 
@@ -35,7 +33,6 @@ export const ContextTreeProvider: React.FC = ({children}) => {
   const [treeRawNodeDatum, setTreeRawNodeDatum] = useState(null as RawNodeDatum)
   const [tree, setTree] = useState(null as NodeTree)
   const [history, setHistory] = useState([])
-  const [handleModalClose, setHandleModalClose] = useState(false)
   let array: number[] = []
 
   useEffect(() => {
@@ -130,7 +127,6 @@ export const ContextTreeProvider: React.FC = ({children}) => {
     <ContextTree.Provider value={{
       treeRawNodeDatum,
       tree,
-      handleModalClose,
       history,
       createNewTree,
       preOrder,
@@ -138,7 +134,6 @@ export const ContextTreeProvider: React.FC = ({children}) => {
       postOrder,
       handleButtonClick,
       handleButtonBFS,
-      setHandleModalClose,
     }}>
       {children}
     </ContextTree.Provider>
