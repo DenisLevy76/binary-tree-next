@@ -1,20 +1,14 @@
 import React, { useContext } from "react"
 import styles from "../styles/Home.module.css"
-import dynamic from "next/dynamic"
 import Buttons from "../components/Buttons"
 import History from "../components/History"
 import Head from "next/head"
 import ReactModal from 'react-modal'
 import { ContextTree } from "../contexts/ContextTree"
-
-
-const TreeGraph = dynamic(
-  () => import("../components/TreeGraph").then(mod => mod.TreeGraph),
-  { ssr: false }
-)
+import { TreeGraph } from "../components/TreeGraph"
 
 export default function Home() {
-  const { handleModalClose, setHandleModalClose } = useContext(ContextTree)
+  const { handleModalClose } = useContext(ContextTree)
 
   return (
     <div className={styles.containerIndex}>
