@@ -26,33 +26,24 @@ export class NodeTree {
   }
 
   preOrder(): number[] {
-    const list = []
-
-    list.push(this.value)
     const left = this.left ? this.left.preOrder() : []
     const right = this.right ? this.right.preOrder() : []
 
-    return [...list, ...left, ...right]
+    return [this.value, ...left, ...right]
   }
 
   inOrder(): number[] {
-    const list = []
-
     const left = this.left ? this.left.inOrder() : []
-    list.push(this.value)
     const right = this.right ? this.right.inOrder() : []
 
-    return [...left, ...list, ...right]
+    return [...left, this.value, ...right]
   }
 
   postOrder(): number[]{
-    const list = []
-
     const left = this.left ? this.left.postOrder() : []
     const right = this.right ? this.right.postOrder() : []
-    list.push(this.value)
 
-    return [...left, ...right, ...list]
+    return [...left, ...right, this.value]
   }
 
   BFS(): number[]{
@@ -97,7 +88,7 @@ export class NodeTree {
     }
   }
 
-  getHeight() {
+  getHeight():number {
     const left = this.left?.getHeight() || 0
     const right = this.right?.getHeight() || 0
 
@@ -105,14 +96,14 @@ export class NodeTree {
     else return right + 1
   }
 
-  getBalanceFactor() {
+  getBalanceFactor(): number {
     const leftHeight = this.left?.getHeight() || 0
     const rightHeight = this.right?.getHeight() || 0
 
     return Math.abs(leftHeight - rightHeight)
   }
 
-  isBalanced() {
+  isBalanced(): boolean {
     //is leaf?
     if (this.left === null && this.right === null) return true
 
@@ -127,7 +118,7 @@ export class NodeTree {
     )
   }
 
-  toString() {
+  toString(): string {
     const left = this.left ? `${this.left.toString()}` : ""
     const right = this.right ? `${this.right.toString()}` : ""
 
