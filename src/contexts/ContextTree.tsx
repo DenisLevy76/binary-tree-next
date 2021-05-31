@@ -22,7 +22,6 @@ interface createContextData{
   handleButtonClick: (msgTitle: string, option: 'preOrder' | 'inOrder' | 'postOrder' | 'BFS') => void;
 }
 
-
 export const ContextTree = createContext({} as createContextData)
 
 export const ContextTreeProvider: React.FC = ({children}) => {
