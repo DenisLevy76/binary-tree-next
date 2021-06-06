@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 30px;
 
   overflow: hidden;
   font-family: Zen Dots;
@@ -19,56 +19,4 @@
   .container{
     font-size: 1rem;
   }
-
-  .inputNumber{
-    font-size: 1rem;
-    padding: 1.5rem 0.6rem;
-  }
-  .button{
-    font-size: 1rem;
-    padding: 1.5rem 0.6rem;
-  }
-}
-
-.h2{
-  margin: 0.8rem;
-}
-
-.inputNumber{
-  font-family: Zen Dots;
-
-  width: 100%;
-  height: 100%;
-
-  background-color: transparent;
-  border: none;
-  border-top: none;
-
-  text-align: center;
-  justify-content: center;
-}
-
-.button{
-  font-family: Zen Dots;
-
-  outline: none;
-
-  width: 100%;
-
-  height: 100%;
-
-  background-color: transparent;
-  border: none;
-  border-top: 1px solid #e1e1e1;
-
-  text-align: center;
-  justify-content: center;
-}
-
-.button:hover:not(:disabled){
-  background-color: #e1e1e1;
-}
-
-.button:disabled{
-  cursor: default;
 }
