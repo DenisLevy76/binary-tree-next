@@ -48,6 +48,7 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
             <Tree
               data={data}
               orientation="vertical"
+              scaleExtent={{min: 0.1, max: 8}}
               translate={{
                 x: 240,
                 y: 30
@@ -74,6 +75,7 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
           <Tree
             data={data}
             orientation="vertical"
+            scaleExtent={{min: 0.1, max: 8}}
             translate={{
               x: 240,
               y: 30
