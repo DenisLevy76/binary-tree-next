@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,11 +12,16 @@
   height: 60%;
 
   box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.137);
-
 }
 
-@media (max-width: 1080px){
-  .container{
+@media (max-width: 1080px) {
+  .container {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 1480px) {
+  .container {
+    height: 75%;
   }
 }
