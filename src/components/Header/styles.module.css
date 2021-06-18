@@ -1,32 +1,33 @@
 .headerContainer {
-    background: #9F75FF;
-    height: 4.5rem;
+  background: #9f75ff;
+  height: 4.5rem;
 
-    display: flex;
-    align-items: center;
-    padding: 2rem 2rem;
+  display: flex;
+  align-items: center;
+  padding: 2rem 6rem;
 
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .img {
-    width: 16.3rem;
-    height: 3.8rem;
+  width: 16.3rem;
+  height: 3.8rem;
 }
 
-.github{
+.github {
   height: 48px;
 }
 
 @media (max-width: 1080px) {
-    .headerContainer {
-        justify-content: space-between;
-    }
-    .img {
-      width: 14.3rem;
-      height: 2.8rem;
-    }
-    .github{
-      height: 32px;
-    }
+  .headerContainer {
+    justify-content: space-between;
+    padding: 2rem 0.3rem;
+  }
+  .img {
+    width: 14.3rem;
+    height: 2.8rem;
+  }
+  .github {
+    height: 32px;
+  }
 }
