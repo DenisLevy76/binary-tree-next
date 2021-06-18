@@ -1,4 +1,4 @@
-.button{
+.button {
   font-family: Zen Dots;
 
   outline: none;
@@ -15,10 +15,16 @@
   justify-content: center;
 }
 
-.button:hover:not(:disabled){
+.button:hover:not(:disabled) {
   background-color: #e1e1e1;
 }
 
-.button:disabled{
+.button:disabled {
   cursor: default;
+}
+
+@media (max-width: 1080px) {
+  .button {
+    height: 4rem;
+  }
 }
