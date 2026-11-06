@@ -1,28 +1,227 @@
-.h2{
-  margin: 0.8rem;
+.panel {
+  border-right: 1px solid var(--border);
+  min-width: 0;
 }
-
-.inputNumber{
-  font-family: Zen Dots;
-
+.panelHeader {
+  height: 43px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 8px var(--font-mono);
+  letter-spacing: 1.2px;
+  color: var(--muted);
+}
+.panelNumber {
+  color: var(--subtle);
+}
+.content {
+  padding: 21px 17px 18px;
+}
+.label {
+  display: block;
+  font-size: 12px;
+  color: #c1c2c9;
+  margin-bottom: 10px;
+}
+.inputRow {
+  display: flex;
+  border: 1px solid #41434a;
+  height: 39px;
+}
+.inputRow:focus-within {
+  border-color: var(--accent);
+}
+.inputRow input {
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  padding: 0 11px;
   width: 100%;
-  height: 100%;
-
-  background-color: transparent;
-  border: none;
-  border-top: none;
-
-  text-align: center;
-  justify-content: center;
+  min-width: 0;
+  font: 12px var(--font-mono);
 }
-
-@media (max-width: 1080px){
-  .inputNumber{
-    font-size: 1rem;
-    padding: 1.5rem 0.6rem;
+.inputRow input:focus-visible {
+  outline: none;
+}
+.inputRow button {
+  width: 40px;
+  flex-shrink: 0;
+  background: #22252b;
+  border: 0;
+  border-left: 1px solid #41434a;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+.inputRow button:hover {
+  background: #2b3447;
+}
+.inputRow button svg {
+  width: 14px;
+  height: 14px;
+}
+.hint,
+.error {
+  font-size: 9px;
+  line-height: 1.6;
+  margin: 8px 0 23px;
+  color: var(--subtle);
+}
+.error {
+  color: #f2a0a0;
+}
+.algorithmHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--subtle);
+  font: 8px var(--font-mono);
+  letter-spacing: 0.9px;
+  margin-bottom: 12px;
+  scroll-margin-top: 25px;
+}
+.algorithmHeading svg {
+  width: 12px;
+  height: 12px;
+}
+.algorithmList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.algorithm,
+.selected {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  width: 100%;
+  padding: 11px 9px;
+  gap: 9px;
+  background: transparent;
+  border: 1px solid transparent;
+}
+.algorithm:hover {
+  background: var(--surface-hover);
+}
+.selected {
+  border-color: #3f5377;
+  background: #1a2230;
+}
+.radio {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #575b67;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+}
+.selected .radio {
+  border-color: var(--accent);
+}
+.selected .radio::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: absolute;
+  inset: 2px;
+}
+.algorithmText {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.algorithmText > span {
+  font-size: 11px;
+  font-weight: 500;
+}
+.selected .algorithmText > span {
+  color: var(--accent);
+}
+.algorithmText small {
+  font-size: 8px;
+  color: var(--subtle);
+  white-space: nowrap;
+}
+.algorithmNumber {
+  margin-left: auto;
+  font: 7px var(--font-mono);
+  color: var(--subtle);
+}
+.speedControl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 19px 0 14px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.speedControl select {
+  border: 1px solid var(--border);
+  padding: 5px 6px;
+  background: var(--background);
+  color: #c5c8d1;
+  font-size: 9px;
+  border-radius: 0;
+}
+.runButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  min-height: 39px;
+  width: 100%;
+  padding: 0 12px;
+  background: var(--text);
+  color: var(--background);
+  border: 1px solid var(--text);
+  font: 500 8px var(--font-mono);
+  letter-spacing: 0.6px;
+}
+.runButton:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.runButton svg {
+  width: 12px;
+  height: 12px;
+}
+@media (max-width: 700px) {
+  .panel {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
   }
-  .button{
-    font-size: 1rem;
-    padding: 1.5rem 0.6rem;
+  .content {
+    padding: 18px;
+  }
+  .algorithmList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .hint,
+  .error {
+    margin-bottom: 20px;
+  }
+  .algorithmText small {
+    font-size: 7px;
+  }
+  .algorithmNumber {
+    display: none;
+  }
+  .algorithm,
+  .selected {
+    padding: 12px 8px;
+  }
+  .speedControl {
+    margin-top: 16px;
+  }
+  .runButton {
+    min-height: 43px;
+    font-size: 9px;
   }
 }

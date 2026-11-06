@@ -1,62 +1,108 @@
-.staffContent {
+.team {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+.person {
+  padding: 25px 28px 30px;
+  min-width: 0;
+}
+.person + .person {
+  border-left: 1px solid var(--border);
+}
+.personMeta {
   display: flex;
-  padding: 0.8rem;
-  background-color: white;
-  border-radius: 1.875rem;
   align-items: center;
+  justify-content: space-between;
+  font: 7px var(--font-mono);
+  letter-spacing: 1px;
+  color: var(--subtle);
+  margin-bottom: 21px;
+}
+.dot {
+  height: 4px;
+  width: 4px;
+  background: var(--accent);
+}
+.portrait {
+  overflow: hidden;
+  background: #202329;
+  aspect-ratio: 1 / 1;
+}
+.portrait img {
   width: 100%;
-  height: 150px;
-  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.137);
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter 0.4s ease, transform 0.4s ease;
 }
-
-.imgStaff {
-  width: 7rem;
-  height: 7rem;
-  border-radius: 100%;
+.person:hover img {
+  filter: grayscale(0);
+  transform: scale(1.025);
 }
-
-.divContent {
+.person h2 {
+  margin: 23px 0 7px;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.8px;
+}
+.person > p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+.links {
+  border-top: 1px solid var(--border);
+  padding-top: 15px;
   display: flex;
-  flex-direction: column;
-  margin: 1.5rem;
-  overflow-x: hidden;
+  flex-wrap: wrap;
+  gap: 12px 18px;
 }
-
-.p {
-  margin-bottom: 0.8rem;
-}
-
-.ulContent {
+.links a {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  font-family: Zen Dots;
+  gap: 7px;
+  color: var(--muted);
+  font: 8px var(--font-mono);
 }
-
-.a {
-  color: #9f75ff;
+.links a:hover {
+  color: var(--accent);
 }
-
-.a:hover {
-  text-decoration: underline;
+.links svg {
+  width: 11px;
+  height: 11px;
 }
-
-@media (max-width: 375px) {
-  .divContent {
-    margin: 1rem;
+.links a > svg:last-child {
+  width: 9px;
+  height: 9px;
+}
+@media (max-width: 900px) {
+  .person {
+    padding: 21px 20px 26px;
   }
-  .staffContent {
-    width: 100%;
-  }
-  .ulContent {
-    gap: 0.3rem;
+  .person h2 {
+    font-size: 20px;
   }
 }
-
-@media (max-width: 321px) {
-  .imgStaff {
-    width: 5rem;
-    height: 5rem;
+@media (max-width: 700px) {
+  .team {
+    grid-template-columns: 1fr;
+  }
+  .person {
+    padding: 25px 22px 30px;
+  }
+  .person + .person {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+  .person h2 {
+    font-size: 26px;
+  }
+  .portrait {
+    max-height: 360px;
   }
 }

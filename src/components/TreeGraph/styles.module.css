@@ -1,50 +1,339 @@
-.treeContainer{
-  width: 100%;
-  height: calc(100vh - 170px);
-
-  position: relative;
-
-
-  border-radius: 30px;
-  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.137);
-  background-color: white;
-
-  font-size: 4rem;
-
-  overflow: hidden;
-}
-
-.treeContainerModal{
-  width: 100%;
-  height: 100vh;
-
-  position: relative;
-
-
-  background-color: white;
-
-  font-size: 4rem;
-
-  overflow: hidden;
-}
-
-.button{
-  position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-
-  font-size: 1.5rem;
-
+.panel {
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border: none;
-  background-color: transparent;
+  flex-direction: column;
+  min-width: 0;
+  background: #121315;
 }
-
-@media (max-width: 1080px){
-  .treeContainer{
-    box-shadow: none;
+.panel:fullscreen {
+  background: var(--background);
+  height: 100vh;
+  width: 100vw;
+}
+.panelHeader {
+  height: 43px;
+  padding: 0 19px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font: 8px var(--font-mono);
+  letter-spacing: 1px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 6px;
+  color: var(--subtle);
+}
+.live > span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.stage {
+  position: relative;
+  height: 360px;
+  flex: 1;
+  min-height: 300px;
+  overflow: hidden;
+  cursor: grab;
+  background-image: radial-gradient(circle, #33353d 0.65px, transparent 0.75px);
+  background-size: 19px 19px;
+  touch-action: none;
+  user-select: none;
+}
+.dragging {
+  cursor: grabbing;
+}
+.tree {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  padding: 48px 16px 16px;
+  overflow: visible;
+}
+.canvasMeta {
+  position: absolute;
+  left: 19px;
+  right: 19px;
+  top: 18px;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--subtle);
+  font: 6px var(--font-mono);
+  letter-spacing: 1px;
+}
+.canvasMeta b {
+  color: var(--muted);
+  font-weight: 400;
+}
+.canvasMeta > span:last-child {
+  color: #a4b1a2;
+  border: 1px solid #333c33;
+  background: #19201a;
+  padding: 4px 6px;
+  margin-top: -5px;
+  font-size: 6px;
+  letter-spacing: 0.7px;
+}
+.edge,
+.visitedEdge {
+  fill: none;
+  stroke: #525966;
+  stroke-width: 1;
+  transition: stroke 0.25s ease;
+}
+.visitedEdge {
+  stroke: var(--accent);
+}
+.node,
+.rootNode,
+.visitedNode,
+.currentNode {
+  cursor: pointer;
+}
+.node circle,
+.rootNode circle,
+.visitedNode circle,
+.currentNode circle {
+  fill: #191d24;
+  stroke: #68758e;
+  stroke-width: 1.1;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+.node:hover circle {
+  fill: #25334b;
+  stroke: var(--accent);
+}
+.rootNode circle {
+  fill: #233b65;
+  stroke: var(--accent);
+}
+.visitedNode circle {
+  fill: #24446f;
+  stroke: var(--accent);
+}
+.currentNode circle {
+  fill: var(--accent);
+  stroke: #b2caff;
+  stroke-width: 2;
+}
+.node text,
+.rootNode text,
+.visitedNode text,
+.currentNode text {
+  fill: #dce4f3;
+  font: 11px var(--font-mono);
+  pointer-events: none;
+}
+.rootNode text {
+  fill: #b9d1ff;
+}
+.currentNode text {
+  fill: #102342;
+  font-weight: 600;
+}
+.tree .rootLabel {
+  fill: var(--accent);
+  font: 6px var(--font-mono);
+  letter-spacing: 2px;
+}
+.axisMark {
+  position: absolute;
+  bottom: 12px;
+  right: 18px;
+  color: #4e535e;
+  font: 16px var(--font-mono);
+  pointer-events: none;
+}
+.canvasToolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 17px;
+  min-height: 49px;
+  border-top: 1px solid var(--border-soft);
+}
+.zoomControls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #3a3d45;
+  background: var(--background);
+}
+.zoomControls button,
+.fullscreenButton {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  width: 28px;
+  height: 27px;
+  color: var(--muted);
+}
+.zoomControls button:hover:not(:disabled),
+.fullscreenButton:hover {
+  background: var(--surface-hover);
+  color: var(--accent);
+}
+.zoomControls button:last-child {
+  border-left: 1px solid var(--border);
+  margin-left: 3px;
+}
+.zoomControls svg,
+.fullscreenButton svg {
+  height: 12px;
+  width: 12px;
+}
+.zoomControls > span {
+  min-width: 34px;
+  text-align: center;
+  color: #c1c6d0;
+  font: 8px var(--font-mono);
+}
+.dragHint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--subtle);
+  font: 6px var(--font-mono);
+  letter-spacing: 0.7px;
+  margin-left: auto;
+}
+.dragHint svg {
+  width: 10px;
+  height: 10px;
+}
+.fullscreenButton {
+  margin-left: auto;
+  border: 1px solid var(--border);
+  width: 28px;
+}
+.traversalBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 17px;
+  min-height: 42px;
+  border-top: 1px solid var(--border);
+  background: #16171a;
+  overflow: hidden;
+}
+.traversalBar > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font: 6px var(--font-mono);
+  letter-spacing: 0.7px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.traversalBar > span b {
+  font-weight: 400;
+  color: var(--subtle);
+}
+.traversalBar > p {
+  margin: 0;
+  color: var(--muted);
+  font: 8px/1.5 var(--font-mono);
+  overflow-wrap: anywhere;
+  max-height: 44px;
+  overflow-y: auto;
+}
+.traversalBar > button {
+  background: transparent;
+  border: 0;
+  margin-left: auto;
+  padding: 0;
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+}
+.traversalBar > button svg {
+  width: 12px;
+  height: 12px;
+}
+.legend i {
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  border: 1px solid #68758e;
+  border-radius: 50%;
+}
+.legend i:nth-of-type(2) {
+  margin-left: 4px;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.cursor {
+  color: var(--accent);
+}
+.panel:fullscreen .stage {
+  height: auto;
+  min-height: 0;
+}
+.panel:fullscreen .tree {
+  padding: 65px 50px 35px;
+}
+@media (max-width: 1150px) {
+  .dragHint {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .panelHeader {
+    padding: 0 17px;
+  }
+  .stage {
+    height: 330px;
+    min-height: 330px;
+    flex: auto;
+  }
+  .tree {
+    padding: 40px 9px 9px;
+  }
+  .tree circle {
+    r: 23px;
+  }
+  .tree g g > text {
+    font-size: 16px;
+  }
+  .tree .rootLabel {
+    font-size: 8px;
+  }
+  .canvasMeta {
+    left: 17px;
+    right: 17px;
+  }
+  .canvasToolbar {
+    min-height: 49px;
+    padding: 9px 16px;
+  }
+  .zoomControls button,
+  .fullscreenButton {
+    width: 40px;
+    height: 40px;
+  }
+  .traversalBar {
+    padding: 13px 16px;
+    gap: 10px;
+  }
+  .traversalBar > p {
+    font-size: 7px;
+  }
+  .traversalBar > span {
+    font-size: 6px;
+  }
+  .panel:fullscreen .stage {
+    flex: 1;
   }
 }

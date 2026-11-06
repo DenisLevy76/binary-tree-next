@@ -1,4 +1,10 @@
 import React from "react"
+import {
+  FiArrowUpRight,
+  FiGithub,
+  FiInstagram,
+  FiLinkedin
+} from "react-icons/fi"
 import styles from "./styles.module.css"
 
 interface People {
@@ -8,29 +14,52 @@ interface People {
   socialMedia: string[]
 }
 
-interface StaffComponentProps {
-  peoples: People[]
+function socialLink(url: string) {
+  if (url.includes("github.com")) return { title: "GitHub", icon: <FiGithub /> }
+  if (url.includes("linkedin.com"))
+    return { title: "LinkedIn", icon: <FiLinkedin /> }
+  return { title: "Instagram", icon: <FiInstagram /> }
 }
 
-export default function StaffComponent({ peoples }: StaffComponentProps) {
+export default function StaffComponent({ peoples }: { peoples: People[] }) {
   return (
-    <ul className={styles.ulContent}>
-      {peoples.map((people: People, index: number) => {
-        return (
-          <li className={styles.staffContent} key={index}>
-            <img className={styles.imgStaff} src={people.image} alt="" />
-            <div className={styles.divContent}>
-              <h3>{people.name}</h3>
-              <p className={styles.p}>{people.role}</p>
-              {people.socialMedia.map((link, index) => (
-                <a className={styles.a} key={index} href={link}>
-                  {link.slice(8, link.length)}
+    <ul className={styles.team}>
+      {peoples.map((person, index) => (
+        <li className={styles.person} key={person.name}>
+          <div className={styles.personMeta}>
+            <span>{String(index + 1).padStart(2, "0")} / COLABORADOR</span>
+            <span className={styles.dot} />
+          </div>
+          <div className={styles.portrait}>
+            <img
+              src={person.image}
+              alt={person.name}
+              width="320"
+              height="320"
+            />
+          </div>
+          <h2>{person.name}</h2>
+          <p>{person.role}</p>
+          <div className={styles.links}>
+            {person.socialMedia.map(url => {
+              const social = socialLink(url)
+              return (
+                <a
+                  href={url}
+                  key={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${social.title} de ${person.name} (abre em nova aba)`}
+                >
+                  {social.icon}
+                  {social.title}
+                  <FiArrowUpRight />
                 </a>
-              ))}
-            </div>
-          </li>
-        )
-      })}
+              )
+            })}
+          </div>
+        </li>
+      ))}
     </ul>
   )
 }
