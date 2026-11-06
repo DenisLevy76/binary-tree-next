@@ -75,6 +75,8 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
   const byValue = new Map(layout.nodes.map(node => [node.value, node]))
 
   useEffect(() => {
+    // Preserve selection reset when a new tree or traversal is displayed.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedNode(null)
   }, [tree, traversal])
 
@@ -128,11 +130,10 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
             aria-labelledby="tree-title tree-description"
           >
             <title id="tree-title">
-              Árvore binária com {layout.nodes.length} nós
+              {`Árvore binária com ${layout.nodes.length} nós`}
             </title>
             <desc id="tree-description">
-              Raiz {tree.value}. Valores em ordem: {tree.inOrder().join(", ")}.{" "}
-              {tree.getHeight()} níveis.
+              {`Raiz ${tree.value}. Valores em ordem: ${tree.inOrder().join(", ")}. ${tree.getHeight()} níveis.`}
             </desc>
             <g
               transform={`translate(${viewport.x} ${viewport.y}) scale(${viewport.scale})`}
@@ -176,8 +177,7 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
                   }
                 >
                   <title>
-                    Nó {node.value}, nível {node.depth + 1}
-                    {node.parent !== null ? `, pai ${node.parent}` : ", raiz"}
+                    {`Nó ${node.value}, nível ${node.depth + 1}${node.parent !== null ? `, pai ${node.parent}` : ", raiz"}`}
                   </title>
                   {node.parent === null && (
                     <text

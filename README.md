@@ -9,19 +9,24 @@ Work related to the evaluative activity of the data structure discipline.
 
 ## Getting Started
 
-First, install the dependencies:
+Use Node.js 24 LTS (`nvm use`) and Yarn Classic 1.22.22. Keep `yarn.lock` committed.
 
 ```bash
-npm i
-# or
-yarn
-```
-then run the development server:
-```bash
-npm run dev
-# or
+yarn install --frozen-lockfile
 yarn dev
 ```
+
+Validation and production:
+
+```bash
+yarn lint
+yarn typecheck
+yarn build
+yarn start
+```
+
+Lint and type checking are separate checks: Next.js 16 does not run ESLint during builds.
+There is no automated test suite configured. See [dependency maintenance notes](docs/dependency-maintenance.md) for migration details and known limitations.
 
 ## Learn More
 

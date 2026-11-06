@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const Buttons: React.FC = ({ children }) => {
+const Buttons: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <div className={styles.container}>

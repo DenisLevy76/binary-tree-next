@@ -6,15 +6,13 @@ import styles from "./styles.module.css"
 export default function Header() {
   return (
     <header className={styles.header}>
-      <Link href="/">
-        <a className={styles.brand} aria-label="Binary Tree — início">
+      <Link href="/" className={styles.brand} aria-label="Binary Tree — início">
           <FiGitBranch aria-hidden="true" />
           <span>
             binary<span className={styles.brandLight}>tree</span>
             <span className={styles.period}>.</span>
           </span>
-        </a>
-      </Link>
+        </Link>
       <NavigationBar />
       <span className={styles.openSource}>
         <span /> OPEN SOURCE
@@ -29,11 +27,9 @@ export default function Header() {
         >
           <FiGithub />
         </a>
-        <Link href="/#laboratorio">
-          <a className={styles.launch}>
+        <Link href="/#laboratorio" className={styles.launch}>
             ABRIR LABORATÓRIO <FiArrowUpRight />
-          </a>
-        </Link>
+          </Link>
       </div>
     </header>
   )

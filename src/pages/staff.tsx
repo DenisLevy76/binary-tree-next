@@ -42,10 +42,8 @@ export default function Staff() {
       <div className={styles.strip}>
         <span>03 / QUEM FAZ ACONTECER</span>
         <Link href="/">
-          <a>
             <FiArrowLeft /> VOLTAR AO VISUALIZADOR
-          </a>
-        </Link>
+          </Link>
       </div>
       <section className={styles.hero}>
         <span className={styles.eyebrow}>PESSOAS POR TRÁS DOS NÓS</span>

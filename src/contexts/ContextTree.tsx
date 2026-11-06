@@ -37,7 +37,7 @@ function sampleTree() {
 
 export const ContextTree = createContext({} as TreeContext)
 
-export const ContextTreeProvider: React.FC = ({ children }) => {
+export const ContextTreeProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [tree, setTree] = useState(sampleTree)
   const [history, setHistory] = useState<HistoryEntry[]>([
     {
