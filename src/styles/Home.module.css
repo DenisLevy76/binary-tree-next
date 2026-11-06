@@ -1,12 +1,11 @@
 .frame {
-  max-width: 1280px;
-  width: calc(100% - 112px);
+  max-width: 1600px;
+  width: calc(100% - 64px);
   margin: 0 auto;
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
+  border-inline: 1px solid var(--border);
 }
 .sectionStrip {
-  height: 43px;
+  height: 40px;
   padding: 0 28px;
   display: flex;
   align-items: center;
@@ -17,31 +16,18 @@
   color: var(--subtle);
 }
 .hero {
-  position: relative;
-  padding: 55px 24px 28px;
-  text-align: center;
-}
-.cornerWord {
-  position: absolute;
-  right: -28px;
-  top: 22px;
-  font-size: 22px;
-  letter-spacing: -0.8px;
-  font-weight: 600;
-}
-.symbol {
   display: flex;
-  justify-content: center;
-  color: var(--accent);
-  margin-bottom: 16px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 30px 32px;
 }
 .productLabel {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.4px;
 }
 .productLabel > span:first-child {
   display: inline-grid;
@@ -58,93 +44,49 @@
   color: var(--accent);
 }
 .hero h1 {
-  font-size: clamp(44px, 5.4vw, 78px);
-  line-height: 1.04;
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.1;
   font-weight: 550;
-  letter-spacing: -4.2px;
-  margin: 26px 0 20px;
+  letter-spacing: -2.6px;
+  margin: 14px 0 0;
 }
 .hero h1 > span {
   color: var(--accent);
 }
+.heroAside {
+  max-width: 340px;
+}
 .description {
   color: var(--muted);
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1.8;
   margin: 0;
 }
-.heroActions {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 27px;
-}
-.primaryAction,
-.secondaryAction {
-  padding: 0 20px;
-  min-height: 45px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 13px;
-  font: 500 10px var(--font-mono);
-  letter-spacing: 1px;
-}
-.primaryAction {
-  background: var(--text);
-  color: var(--background);
-  border: 1px solid var(--text);
-}
-.primaryAction:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-.secondaryAction {
-  border: 1px solid #55565d;
-}
-.secondaryAction:hover {
-  border-color: var(--accent);
-  background: var(--surface-hover);
-}
-.heroActions svg {
-  width: 15px;
-  height: 15px;
-}
-.heroNote {
-  margin: 15px 0 0;
-  color: var(--subtle);
-  font: 8px var(--font-mono);
-  letter-spacing: 1.4px;
-}
-.heroNote span {
-  margin: 0 7px;
-}
-.scrollHint {
+.sourceLink {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   color: var(--subtle);
+  margin-top: 14px;
   font: 8px var(--font-mono);
-  letter-spacing: 1.5px;
-  margin-top: 34px;
+  letter-spacing: 1px;
 }
-.scrollHint > span {
-  width: 3px;
-  height: 3px;
-  background: var(--accent);
+.sourceLink svg {
+  width: 12px;
+  height: 12px;
 }
-.scrollHint:hover {
+.sourceLink:hover {
   color: var(--accent);
 }
 .laboratory {
   border-top: 1px solid var(--border);
+  scroll-margin-top: 18px;
 }
 .labHeading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 27px 28px 24px;
+  padding: 19px 28px;
   border-bottom: 1px solid var(--border);
   gap: 20px;
 }
@@ -154,11 +96,11 @@
   letter-spacing: 1.4px;
 }
 .labHeading h2 {
-  font-size: 27px;
+  font-size: 24px;
   line-height: 1.15;
   font-weight: 500;
-  letter-spacing: -1px;
-  margin: 9px 0 0;
+  letter-spacing: -0.8px;
+  margin: 8px 0 0;
 }
 .labHeading h2 > span {
   color: var(--accent);
@@ -167,9 +109,9 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  color: var(--subtle);
-  font: 8px var(--font-mono);
-  letter-spacing: 1px;
+  color: var(--muted);
+  font: 9px var(--font-mono);
+  letter-spacing: 0.9px;
 }
 .statusDot {
   display: inline-block;
@@ -180,8 +122,20 @@
 }
 .workspace {
   display: grid;
-  grid-template-columns: 230px minmax(0, 1fr) 230px;
-  min-height: 492px;
+  grid-template-columns: 240px minmax(0, 1fr);
+  align-items: stretch;
+}
+.workspace > :nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+}
+.workspace > :first-child {
+  grid-column: 1;
+  grid-row: 1;
+}
+.workspace > :last-child {
+  grid-column: 1 / -1;
+  grid-row: 2;
 }
 .labFooter {
   border-top: 1px solid var(--border);
@@ -209,7 +163,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 29px 28px;
+  padding: 25px 28px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -261,71 +215,39 @@
   top: 108px;
   bottom: 0;
   right: 0;
-  width: 28px;
+  width: 20px;
   pointer-events: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 0 30px;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 88px,
-    #393b40 88px,
-    #393b40 89px,
-    transparent 89px,
-    transparent 176px
-  );
-  background-size: 9px 176px;
-  background-position: right top;
-  background-repeat: repeat-y;
+  padding-bottom: 30px;
 }
 .ruler > span {
   color: var(--subtle);
   font: 7px var(--font-mono);
   border-top: 1px solid #53555d;
   padding-top: 3px;
-  width: 20px;
+  width: 12px;
   align-self: flex-end;
 }
-@media (min-width: 1700px) {
-  .hero {
-    padding-top: 72px;
-    padding-bottom: 35px;
-  }
-  .hero h1 {
-    font-size: 84px;
-  }
-}
-@media (max-width: 1150px) {
-  .workspace {
-    grid-template-columns: 210px minmax(0, 1fr) 200px;
-  }
+@media (max-width: 1100px) {
   .frame {
-    width: calc(100% - 64px);
+    width: calc(100% - 40px);
   }
-  .hero h1 {
-    letter-spacing: -3px;
+  .hero {
+    gap: 24px;
+    padding-inline: 26px;
   }
-}
-@media (max-width: 1000px) {
+  .heroAside {
+    max-width: 280px;
+  }
   .workspace {
     grid-template-columns: 220px minmax(0, 1fr);
-  }
-  .workspace > :last-child {
-    grid-column: 1 / -1;
-  }
-  .cornerWord {
-    font-size: 18px;
-    right: -15px;
-  }
-  .labHeading > p {
-    font-size: 7px;
   }
 }
 @media (max-width: 700px) {
   .frame {
-    width: calc(100% - 32px);
+    width: calc(100% - 24px);
   }
   .sectionStrip {
     padding: 0 16px;
@@ -336,68 +258,32 @@
     display: none;
   }
   .hero {
-    padding: 56px 15px 26px;
-  }
-  .cornerWord {
-    font-size: 14px;
-    right: -6px;
-    top: 15px;
-  }
-  .symbol {
-    margin-bottom: 14px;
-  }
-  .symbol svg {
-    width: 52px;
-    height: 52px;
-  }
-  .productLabel {
-    font-size: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 24px 18px;
   }
   .hero h1 {
-    font-size: clamp(38px, 7.2vw, 52px);
-    letter-spacing: -2px;
-    margin-top: 24px;
+    font-size: clamp(34px, 8vw, 46px);
+    letter-spacing: -1.7px;
+    margin-top: 13px;
+  }
+  .heroAside {
+    max-width: 430px;
   }
   .description {
-    font-size: 13px;
-    line-height: 1.8;
-    max-width: 340px;
-    margin-inline: auto;
+    font-size: 12px;
+    line-height: 1.7;
   }
-  .desktopBreak {
-    display: none;
-  }
-  .heroActions {
-    gap: 8px;
-    margin-top: 24px;
-  }
-  .primaryAction,
-  .secondaryAction {
-    padding: 0 12px;
-    gap: 9px;
-    font-size: 8px;
-    min-height: 44px;
-    letter-spacing: 0.5px;
-  }
-  .secondaryAction > svg:last-child {
-    display: none;
-  }
-  .heroNote {
-    font-size: 6.5px;
-    letter-spacing: 0.8px;
-  }
-  .heroNote span {
-    margin: 0 3px;
-  }
-  .scrollHint {
-    margin-top: 28px;
+  .sourceLink {
+    margin-top: 10px;
     font-size: 7px;
   }
   .labHeading {
-    padding: 22px 18px;
+    padding: 17px 18px;
   }
   .labHeading h2 {
-    font-size: 25px;
+    font-size: 23px;
   }
   .labHeading > p {
     display: none;
@@ -405,8 +291,17 @@
   .workspace {
     grid-template-columns: 1fr;
   }
+  .workspace > :nth-child(2) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .workspace > :first-child {
+    grid-column: 1;
+    grid-row: 2;
+  }
   .workspace > :last-child {
-    grid-column: auto;
+    grid-column: 1;
+    grid-row: 3;
   }
   .labFooter {
     padding: 13px 16px;
@@ -437,8 +332,7 @@
     width: 100%;
   }
   .ruler {
-    width: 8px;
-    top: 147px;
+    width: 6px;
   }
   .ruler > span {
     display: none;

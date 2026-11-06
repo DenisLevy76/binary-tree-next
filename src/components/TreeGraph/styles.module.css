@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background: #121315;
+  background: #121519;
 }
 .panel:fullscreen {
   background: var(--background);
@@ -10,42 +10,46 @@
   width: 100vw;
 }
 .panelHeader {
-  height: 43px;
-  padding: 0 19px;
+  min-height: 48px;
+  padding: 0 22px;
   border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  font: 8px var(--font-mono);
+  font: 10px var(--font-mono);
   letter-spacing: 1px;
-  color: var(--muted);
+  color: #c4c9d3;
   flex-shrink: 0;
 }
 .live {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 6px;
-  color: var(--subtle);
+  gap: 7px;
+  font-size: 8px;
+  color: var(--muted);
 }
 .live > span {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--accent);
 }
 .stage {
   position: relative;
-  height: 360px;
-  flex: 1;
-  min-height: 300px;
+  height: clamp(500px, 66vh, 780px);
+  flex: 1 0 auto;
+  min-height: 500px;
   overflow: hidden;
   cursor: grab;
-  background-image: radial-gradient(circle, #33353d 0.65px, transparent 0.75px);
-  background-size: 19px 19px;
+  background-image: radial-gradient(circle, #454b58 0.8px, transparent 0.9px);
+  background-size: 24px 24px;
   touch-action: none;
   user-select: none;
+  overscroll-behavior: contain;
+}
+.stage:focus-visible {
+  outline-offset: -3px;
 }
 .dragging {
   cursor: grabbing;
@@ -55,45 +59,45 @@
   height: 100%;
   position: absolute;
   inset: 0;
-  padding: 48px 16px 16px;
-  overflow: visible;
+  overflow: hidden;
 }
 .canvasMeta {
   position: absolute;
-  left: 19px;
-  right: 19px;
-  top: 18px;
+  left: 23px;
+  right: 23px;
+  top: 21px;
   z-index: 1;
   pointer-events: none;
   display: flex;
   justify-content: space-between;
   gap: 10px;
   color: var(--subtle);
-  font: 6px var(--font-mono);
+  font: 9px var(--font-mono);
   letter-spacing: 1px;
 }
 .canvasMeta b {
-  color: var(--muted);
+  color: #bdc5d4;
   font-weight: 400;
 }
 .canvasMeta > span:last-child {
-  color: #a4b1a2;
-  border: 1px solid #333c33;
-  background: #19201a;
-  padding: 4px 6px;
+  color: #b5c6b2;
+  border: 1px solid #394539;
+  background: #19221c;
+  padding: 5px 8px;
   margin-top: -5px;
-  font-size: 6px;
+  font-size: 8px;
   letter-spacing: 0.7px;
 }
 .edge,
 .visitedEdge {
   fill: none;
-  stroke: #525966;
-  stroke-width: 1;
+  stroke: #6f7a91;
+  stroke-width: 1.5;
   transition: stroke 0.25s ease;
 }
 .visitedEdge {
   stroke: var(--accent);
+  stroke-width: 2;
 }
 .node,
 .rootNode,
@@ -105,69 +109,72 @@
 .rootNode circle,
 .visitedNode circle,
 .currentNode circle {
-  fill: #191d24;
-  stroke: #68758e;
-  stroke-width: 1.1;
+  fill: #1d2532;
+  stroke: #8a9dbd;
+  stroke-width: 1.6;
   transition: fill 0.2s ease, stroke 0.2s ease;
 }
 .node:hover circle {
-  fill: #25334b;
-  stroke: var(--accent);
+  fill: #2c4163;
+  stroke: #c3d9ff;
 }
 .rootNode circle {
-  fill: #233b65;
-  stroke: var(--accent);
+  fill: #2b4778;
+  stroke: #9bbfff;
+  stroke-width: 2;
 }
 .visitedNode circle {
-  fill: #24446f;
-  stroke: var(--accent);
+  fill: #2d527f;
+  stroke: #a3c4ff;
 }
 .currentNode circle {
   fill: var(--accent);
-  stroke: #b2caff;
-  stroke-width: 2;
+  stroke: #cbdcff;
+  stroke-width: 3;
 }
 .node text,
 .rootNode text,
 .visitedNode text,
 .currentNode text {
-  fill: #dce4f3;
-  font: 11px var(--font-mono);
+  fill: #edf3ff;
+  font: 500 17px var(--font-mono);
   pointer-events: none;
 }
 .rootNode text {
-  fill: #b9d1ff;
+  fill: #e2ecff;
 }
 .currentNode text {
   fill: #102342;
   font-weight: 600;
 }
 .tree .rootLabel {
-  fill: var(--accent);
-  font: 6px var(--font-mono);
+  fill: #a4c5ff;
+  font: 9px var(--font-mono);
   letter-spacing: 2px;
 }
 .axisMark {
   position: absolute;
-  bottom: 12px;
-  right: 18px;
-  color: #4e535e;
-  font: 16px var(--font-mono);
+  bottom: 18px;
+  right: 23px;
+  color: #6b7587;
+  font: 20px var(--font-mono);
   pointer-events: none;
 }
 .canvasToolbar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 17px;
-  min-height: 49px;
-  border-top: 1px solid var(--border-soft);
+  gap: 18px;
+  padding: 12px 20px;
+  min-height: 64px;
+  border-top: 1px solid var(--border);
+  background: #15181d;
 }
 .zoomControls {
   display: flex;
   align-items: center;
-  border: 1px solid #3a3d45;
+  border: 1px solid #485161;
   background: var(--background);
+  flex-shrink: 0;
 }
 .zoomControls button,
 .fullscreenButton {
@@ -176,101 +183,110 @@
   border: 0;
   background: transparent;
   padding: 0;
-  width: 28px;
-  height: 27px;
-  color: var(--muted);
+  width: 38px;
+  height: 36px;
+  color: #c1cbdd;
 }
 .zoomControls button:hover:not(:disabled),
 .fullscreenButton:hover {
-  background: var(--surface-hover);
-  color: var(--accent);
+  background: #26344b;
+  color: #bcd3ff;
 }
 .zoomControls button:last-child {
-  border-left: 1px solid var(--border);
-  margin-left: 3px;
+  border-left: 1px solid #485161;
+  margin-left: 4px;
 }
 .zoomControls svg,
 .fullscreenButton svg {
-  height: 12px;
-  width: 12px;
+  height: 16px;
+  width: 16px;
 }
 .zoomControls > span {
-  min-width: 34px;
+  min-width: 48px;
   text-align: center;
-  color: #c1c6d0;
-  font: 8px var(--font-mono);
+  color: #d4deee;
+  font: 11px var(--font-mono);
 }
 .dragHint {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 18px;
+  color: var(--muted);
+  font-size: 10px;
+  margin-inline: auto;
+}
+.dragHint > span {
+  display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--subtle);
-  font: 6px var(--font-mono);
-  letter-spacing: 0.7px;
-  margin-left: auto;
+  white-space: nowrap;
 }
 .dragHint svg {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
+  color: var(--accent);
 }
 .fullscreenButton {
   margin-left: auto;
-  border: 1px solid var(--border);
-  width: 28px;
+  border: 1px solid #485161;
+  width: 38px;
+  flex-shrink: 0;
 }
 .traversalBar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 17px;
-  min-height: 42px;
+  gap: 15px;
+  padding: 13px 20px;
+  min-height: 49px;
   border-top: 1px solid var(--border);
-  background: #16171a;
+  background: #16191f;
   overflow: hidden;
 }
 .traversalBar > span {
   display: flex;
   align-items: center;
-  gap: 7px;
-  font: 6px var(--font-mono);
+  gap: 8px;
+  font: 9px var(--font-mono);
   letter-spacing: 0.7px;
-  color: var(--accent);
+  color: #a4c4ff;
   flex-shrink: 0;
 }
 .traversalBar > span b {
   font-weight: 400;
-  color: var(--subtle);
+  color: var(--muted);
 }
 .traversalBar > p {
   margin: 0;
-  color: var(--muted);
-  font: 8px/1.5 var(--font-mono);
+  color: #b4bdcc;
+  font: 10px/1.7 var(--font-mono);
   overflow-wrap: anywhere;
-  max-height: 44px;
+  max-height: 52px;
   overflow-y: auto;
 }
 .traversalBar > button {
   background: transparent;
   border: 0;
   margin-left: auto;
-  padding: 0;
+  padding: 5px;
   color: var(--muted);
   display: grid;
   place-items: center;
 }
 .traversalBar > button svg {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
 }
 .legend i {
-  width: 5px;
-  height: 5px;
+  width: 7px;
+  height: 7px;
   display: inline-block;
-  border: 1px solid #68758e;
+  border: 1px solid #8a9dbd;
   border-radius: 50%;
 }
 .legend i:nth-of-type(2) {
-  margin-left: 4px;
+  margin-left: 5px;
   background: var(--accent);
   border-color: var(--accent);
 }
@@ -279,12 +295,22 @@
 }
 .panel:fullscreen .stage {
   height: auto;
+  flex: 1 1 0;
   min-height: 0;
 }
-.panel:fullscreen .tree {
-  padding: 65px 50px 35px;
+@media (max-width: 1100px) {
+  .dragHint > span:last-child {
+    display: none;
+  }
+  .canvasToolbar {
+    gap: 12px;
+  }
+  .dragHint {
+    font-size: 9px;
+    gap: 7px;
+  }
 }
-@media (max-width: 1150px) {
+@media (max-width: 850px) {
   .dragHint {
     display: none;
   }
@@ -292,48 +318,47 @@
 @media (max-width: 700px) {
   .panelHeader {
     padding: 0 17px;
+    font-size: 8px;
+    min-height: 46px;
+  }
+  .live {
+    font-size: 7px;
   }
   .stage {
-    height: 330px;
-    min-height: 330px;
-    flex: auto;
-  }
-  .tree {
-    padding: 40px 9px 9px;
-  }
-  .tree circle {
-    r: 23px;
-  }
-  .tree g g > text {
-    font-size: 16px;
-  }
-  .tree .rootLabel {
-    font-size: 8px;
+    height: max(420px, 58vh);
+    min-height: 420px;
   }
   .canvasMeta {
     left: 17px;
     right: 17px;
+    top: 20px;
+    font-size: 8px;
+  }
+  .canvasMeta > span:last-child {
+    font-size: 7px;
+    padding: 5px 6px;
   }
   .canvasToolbar {
-    min-height: 49px;
-    padding: 9px 16px;
+    min-height: 65px;
+    padding: 10px 16px;
   }
   .zoomControls button,
   .fullscreenButton {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
+  }
+  .zoomControls > span {
+    min-width: 43px;
+    font-size: 10px;
   }
   .traversalBar {
     padding: 13px 16px;
     gap: 10px;
   }
   .traversalBar > p {
-    font-size: 7px;
+    font-size: 9px;
   }
   .traversalBar > span {
-    font-size: 6px;
-  }
-  .panel:fullscreen .stage {
-    flex: 1;
+    font-size: 8px;
   }
 }

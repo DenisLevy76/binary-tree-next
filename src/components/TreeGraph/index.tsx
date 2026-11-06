@@ -3,13 +3,16 @@ import {
   FiMaximize2,
   FiMinus,
   FiPlus,
-  FiRotateCcw,
+  FiCrosshair,
+  FiMousePointer,
   FiX,
   FiMove
 } from "react-icons/fi"
 import { ContextTree, RawNodeDatum } from "../../contexts/ContextTree"
 import { NodeTree } from "../../utils/tree"
 import styles from "./styles.module.css"
+import { MAX_ZOOM, MIN_ZOOM } from "../../utils/treeViewport"
+import { useTreeViewport } from "./useTreeViewport"
 
 interface TreeGraphProps {
   data: RawNodeDatum
@@ -30,52 +33,50 @@ function positionTree(tree: NodeTree) {
     visit(node.left, depth + 1, node.value)
     nodes.push({
       value: node.value,
-      x: 42 + index++ * 47,
-      y: 52 + depth * 82,
+      x: 70 + index++ * 44,
+      y: 72 + depth * 112,
       depth,
       parent
     })
     visit(node.right, depth + 1, node.value)
   }
   visit(tree, 0, null)
-  const width = Math.max(420, (nodes.length - 1) * 47 + 84)
-  const offset = (width - ((nodes.length - 1) * 47 + 84)) / 2
+  const width = Math.max(360, (nodes.length - 1) * 44 + 140)
+  const offset = (width - ((nodes.length - 1) * 44 + 140)) / 2
   nodes.forEach(node => {
     node.x += offset
   })
   return {
     nodes,
     width,
-    height: Math.max(330, (tree.getHeight() - 1) * 82 + 104)
+    height: Math.max(220, (tree.getHeight() - 1) * 112 + 144)
   }
 }
 
 export const TreeGraph = ({ data }: TreeGraphProps) => {
   const { tree, traversal, activeStep, isRunning } = useContext(ContextTree)
   const layout = useMemo(() => positionTree(tree), [tree])
-  const [zoom, setZoom] = useState(1)
-  const [pan, setPan] = useState({ x: 0, y: 0 })
   const [fullscreen, setFullscreen] = useState(false)
-  const [dragging, setDragging] = useState(false)
   const [selectedNode, setSelectedNode] = useState<number | null>(null)
   const panel = useRef<HTMLElement>(null)
-  const stage = useRef<HTMLDivElement>(null)
-  const dragStart = useRef<{
-    x: number
-    y: number
-    panX: number
-    panY: number
-    node: number | null
-  } | null>(null)
+  const {
+    stage,
+    size,
+    viewport,
+    dragging,
+    resetView,
+    changeZoom,
+    interactions
+  } = useTreeViewport(layout, value =>
+    setSelectedNode(previous => (previous === value ? null : value))
+  )
   const completed = traversal.slice(0, activeStep + 1)
   const current = traversal[activeStep]
   const byValue = new Map(layout.nodes.map(node => [node.value, node]))
 
   useEffect(() => {
-    setZoom(1)
-    setPan({ x: 0, y: 0 })
     setSelectedNode(null)
-  }, [tree])
+  }, [tree, traversal])
 
   useEffect(() => {
     const onFullscreenChange = () =>
@@ -85,15 +86,6 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
       document.removeEventListener("fullscreenchange", onFullscreenChange)
   }, [])
 
-  function resetView() {
-    setZoom(1)
-    setPan({ x: 0, y: 0 })
-  }
-  function changeZoom(amount: number) {
-    setZoom(value =>
-      Math.max(0.5, Math.min(2.5, Math.round((value + amount) * 100) / 100))
-    )
-  }
   async function toggleFullscreen() {
     if (document.fullscreenElement) await document.exitFullscreen()
     else if (panel.current?.requestFullscreen)
@@ -119,75 +111,8 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
         ref={stage}
         tabIndex={0}
         role="group"
-        aria-label="Área da árvore. Use mais e menos para zoom e as setas para mover."
-        onKeyDown={event => {
-          if (event.key === "+" || event.key === "=") {
-            event.preventDefault()
-            changeZoom(0.2)
-          }
-          if (event.key === "-") {
-            event.preventDefault()
-            changeZoom(-0.2)
-          }
-          if (event.key === "0") resetView()
-          const offsets = {
-            ArrowLeft: [30, 0],
-            ArrowRight: [-30, 0],
-            ArrowUp: [0, 30],
-            ArrowDown: [0, -30]
-          }
-          if (offsets[event.key]) {
-            event.preventDefault()
-            const [x, y] = offsets[event.key]
-            setPan(value => ({ x: value.x + x, y: value.y + y }))
-          }
-        }}
-        onPointerDown={event => {
-          if (event.button !== 0) return
-          const target = (event.target as Element).closest("[data-node]")
-          dragStart.current = {
-            x: event.clientX,
-            y: event.clientY,
-            panX: pan.x,
-            panY: pan.y,
-            node: target ? Number(target.getAttribute("data-node")) : null
-          }
-          event.currentTarget.setPointerCapture(event.pointerId)
-        }}
-        onPointerMove={event => {
-          if (!dragStart.current || !stage.current) return
-          const dx = event.clientX - dragStart.current.x
-          const dy = event.clientY - dragStart.current.y
-          if (Math.abs(dx) + Math.abs(dy) > 4) setDragging(true)
-          const scale = Math.max(
-            layout.width / stage.current.clientWidth,
-            layout.height / stage.current.clientHeight
-          )
-          setPan({
-            x: dragStart.current.panX + dx * scale,
-            y: dragStart.current.panY + dy * scale
-          })
-        }}
-        onPointerUp={event => {
-          if (
-            dragStart.current &&
-            Math.abs(event.clientX - dragStart.current.x) +
-              Math.abs(event.clientY - dragStart.current.y) <
-              5 &&
-            dragStart.current.node !== null
-          ) {
-            const value = dragStart.current.node
-            setSelectedNode(previous => (previous === value ? null : value))
-          }
-          dragStart.current = null
-          setDragging(false)
-          if (event.currentTarget.hasPointerCapture(event.pointerId))
-            event.currentTarget.releasePointerCapture(event.pointerId)
-        }}
-        onPointerCancel={() => {
-          dragStart.current = null
-          setDragging(false)
-        }}
+        aria-label="Área da árvore. Arraste para mover, use a roda do mouse ou mais e menos para zoom. Duplo clique ou zero para enquadrar."
+        {...interactions}
       >
         <div className={styles.canvasMeta}>
           <span>
@@ -198,7 +123,7 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
         {data && (
           <svg
             className={styles.tree}
-            viewBox={`0 0 ${layout.width} ${layout.height}`}
+            viewBox={`0 0 ${size.width} ${size.height}`}
             role="img"
             aria-labelledby="tree-title tree-description"
           >
@@ -210,11 +135,7 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
               {tree.getHeight()} níveis.
             </desc>
             <g
-              transform={`translate(${layout.width / 2 + pan.x} ${
-                layout.height / 2 + pan.y
-              }) scale(${zoom}) translate(${-layout.width / 2} ${
-                -layout.height / 2
-              })`}
+              transform={`translate(${viewport.x} ${viewport.y}) scale(${viewport.scale})`}
             >
               {layout.nodes
                 .filter(node => node.parent !== null)
@@ -227,15 +148,15 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
                     <path
                       key={`edge-${node.value}`}
                       className={visited ? styles.visitedEdge : styles.edge}
-                      d={`M ${parent.x} ${parent.y + 17} V ${parent.y + 37} Q ${
+                      d={`M ${parent.x} ${parent.y + 26} V ${parent.y + 48} Q ${
                         parent.x
-                      } ${parent.y + 42}, ${
-                        parent.x + (node.x > parent.x ? 6 : -6)
-                      } ${parent.y + 42} H ${
-                        node.x + (node.x > parent.x ? -6 : 6)
-                      } Q ${node.x} ${parent.y + 42}, ${node.x} ${
-                        parent.y + 48
-                      } V ${node.y - 17}`}
+                      } ${parent.y + 56}, ${
+                        parent.x + (node.x > parent.x ? 8 : -8)
+                      } ${parent.y + 56} H ${
+                        node.x + (node.x > parent.x ? -8 : 8)
+                      } Q ${node.x} ${parent.y + 56}, ${node.x} ${
+                        parent.y + 64
+                      } V ${node.y - 26}`}
                     />
                   )
                 })}
@@ -261,13 +182,13 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
                   {node.parent === null && (
                     <text
                       className={styles.rootLabel}
-                      y="-30"
+                      y="-40"
                       textAnchor="middle"
                     >
                       RAIZ
                     </text>
                   )}
-                  <circle r="17" />
+                  <circle r="26" />
                   <text dy=".35em" textAnchor="middle">
                     {node.value}
                   </text>
@@ -284,18 +205,18 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
         <div className={styles.zoomControls}>
           <button
             type="button"
-            onClick={() => changeZoom(-0.2)}
-            disabled={zoom <= 0.5}
+            onClick={() => changeZoom(1 / 1.25)}
+            disabled={viewport.scale <= MIN_ZOOM}
             aria-label="Diminuir zoom"
             title="Diminuir zoom"
           >
             <FiMinus />
           </button>
-          <span>{Math.round(zoom * 100)}%</span>
+          <span>{Math.round(viewport.scale * 100)}%</span>
           <button
             type="button"
-            onClick={() => changeZoom(0.2)}
-            disabled={zoom >= 2.5}
+            onClick={() => changeZoom(1.25)}
+            disabled={viewport.scale >= MAX_ZOOM}
             aria-label="Aumentar zoom"
             title="Aumentar zoom"
           >
@@ -305,13 +226,19 @@ export const TreeGraph = ({ data }: TreeGraphProps) => {
             type="button"
             onClick={resetView}
             aria-label="Centralizar árvore"
-            title="Centralizar árvore"
+            title="Enquadrar árvore (0 ou duplo clique)"
           >
-            <FiRotateCcw />
+            <FiCrosshair />
           </button>
         </div>
         <span className={styles.dragHint}>
-          <FiMove /> ARRASTE PARA EXPLORAR
+          <span>
+            <FiMove /> Arraste para mover
+          </span>
+          <span>
+            <FiMousePointer /> Role para ampliar
+          </span>
+          <span>Duplo clique para enquadrar</span>
         </span>
         <button
           type="button"

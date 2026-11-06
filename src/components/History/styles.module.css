@@ -1,5 +1,5 @@
 .panel {
-  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -41,9 +41,14 @@
   list-style: none;
   padding: 0 16px;
   margin: 0;
-  height: 405px;
+  height: 145px;
+  max-height: 200px;
+  min-height: 120px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  align-content: start;
+  gap: 0 28px;
   overflow-y: auto;
-  flex: 1;
 }
 .entry {
   display: flex;
